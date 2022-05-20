@@ -99,7 +99,7 @@ tm_shape(temp)+
 ```
 
 ```{r DEM, eval=T, echo=F, out.width="80%", fig.align="center", message=F, warning=F}
-dem=raster("./Raster Data/dem_20m.tif")
+dem=raster("C:/Users/ASUS/Desktop/R Transportation/raster/Raster Data/dem_20m.tif")
 town=dplyr::filter(taiwan_town, TOWNNAME %in% c("內湖區"))%>%
   st_transform(crs=3826)
 temp=raster::intersect(dem, extent(st_bbox(town)[c(1,3,2,4)]))
@@ -128,4 +128,4 @@ DT::datatable(temp_XY[1:1000,])
 ```
 
 
-以上程式碼請在[這裡]()下載!
+以上完整程式碼請在[這裡](https://github.com/ChiaJung-Yeh/R-Code-Sharing/blob/main/DEM/DEM.R)!
