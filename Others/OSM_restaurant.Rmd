@@ -1,0 +1,72 @@
+---
+title: "OSM Restaurant"
+output: html_document
+---
+
+<style type="text/css">
+
+body{
+font-size: 18px;
+font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+td {  /* Table  */
+  font-size: 8px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+h1.title {
+  font-size: 38px;
+  color: DarkRed;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+h1 { /* Header 1 */
+  font-size: 28px;
+      font-family:"Times New Roman","標楷體",Georgia,Serif;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+    font-family:"Times New Roman","標楷體",Georgia,Serif;
+    color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+  color: DarkBlue;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+.blogbody{
+font-size:17px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+line-height: 150%;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(data.table)
+library(tmap)
+library(sf)
+library(dplyr)
+
+tmap_mode("view")
+
+```
+
+```{r map, eval=T, echo=F, out.width='100%'}
+amenity=fread("D:/Sidewalk/Analysis/5_POI Categorization/C_OpenStreetMap/amenity.csv")%>%
+  mutate(geometry=st_as_sfc(paste0("POINT(", lon, " ", lat, ")")))%>%
+  st_sf(crs=4326)%>%
+  st_transform(crs=3826)
+
+tm_shape(filter(amenity, amenity=="restaurant"))+
+  tm_dots()
+
+```
+

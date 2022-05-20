@@ -1,0 +1,101 @@
+---
+title: "taiwan_county"
+author: "Chia-Jung, Yeh"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+<style type="text/css">
+
+body{
+font-size: 18px;
+font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+td {  /* Table  */
+  font-size: 8px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+h1.title {
+  font-size: 38px;
+  color: DarkRed;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+h1 { /* Header 1 */
+  font-size: 28px;
+      font-family:"Times New Roman","標楷體",Georgia,Serif;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+    font-family:"Times New Roman","標楷體",Georgia,Serif;
+    color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+  color: DarkBlue;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+.blogbody{
+font-size:17px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+line-height: 150%;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(TWspdata)
+library(dplyr)
+library(sf)
+library(ggplot2)
+```
+
+
+## taiwan_county 繪圖
+
+內政部的臺灣圖資包含所有離島地區，而南沙群島（高雄市旗津區）也含括在內，該島位於菲律賓附近，所以地圖會涵蓋到低緯度的地區，畫出來如下圖是正常的！  
+
+```{r code_original, echo=F, eval=T, error=T}
+ggplot()+
+  geom_sf(data=taiwan_county)
+```
+
+## 修正方法
+
+1. 先自google地圖查詢臺灣本島邊界的經緯度（經度：119.910836 ~ 122.079171；緯度：21.883065 ~ 25.356588）。
+2. 利用[`st_bbox()`](https://rdrr.io/cran/sf/man/st_bbox.html)函式定義臺灣本島邊界的外框。  
+
+```{r tw_border, echo=T, eval=T, error=T}
+# 定義邊框 (設定CRS為4326，因為經緯度為EPSG:4326之格式)
+tw_border=st_bbox(c(xmin=119.910836, xmax=122.079171, ymin=21.883065, ymax=25.356588), crs=4326)
+```
+
+3. 將邊框轉換為[Simple Feature Column (sfc)](https://chiajung-yeh.github.io/Spatial-Analysis/geographic-data.html#simple-feature-columns-sfc)的格式，並利用[`st_transform()`](https://chiajung-yeh.github.io/Spatial-Analysis/geographic-data.html#reproject-geographic-data)函式將其CRS轉換為EPSG:3826。  
+```{r tw_border_sfc, echo=T, eval=T, error=T}
+tw_border=st_as_sfc(tw_border)
+tw_border=st_transform(tw_border, crs=3826)
+```
+
+4. 利用[`st_intersection()`](https://chiajung-yeh.github.io/Spatial-Analysis/spatial-operations.html#clipping)函式裁切
+```{r taiwan_county_revised, echo=T, eval=T, error=T}
+# 這裡要先將taiwan_county轉換為EPSG:3826的格式（原本是EPSG:3824），CRS相同才有辦法用st_intersection裁切
+taiwan_county_revised=st_transform(taiwan_county, crs=3826)
+
+# 接著再利用邊界裁切
+taiwan_county_revised=st_intersection(taiwan_county_revised, tw_border)
+```
+
+最後依據上述流程，新產生的地圖將只留下臺灣本島的資料，如下圖所示。
+```{r taiwan_county_newmap, echo=F, eval=T, error=T}
+ggplot()+
+  geom_sf(data=taiwan_county_revised)
+```
+
+

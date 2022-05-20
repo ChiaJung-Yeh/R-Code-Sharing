@@ -1,0 +1,109 @@
+---
+title: "地理資料交集"
+author: "Chia-Jung, Yeh"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+<style type="text/css">
+
+body{
+font-size: 18px;
+font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+td {  /* Table  */
+  font-size: 8px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+h1.title {
+  font-size: 38px;
+  color: DarkRed;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+h1 { /* Header 1 */
+  font-size: 28px;
+      font-family:"Times New Roman","標楷體",Georgia,Serif;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+    font-family:"Times New Roman","標楷體",Georgia,Serif;
+    color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+  color: DarkBlue;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+.blogbody{
+font-size:17px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+line-height: 150%;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(TWspdata)
+library(sf)
+library(DT)
+```
+
+## **交集 st_intersection**
+
+地理資料取交集可利用`sf`套件的`st_intersection()`函式完成之。在`st_intersection()`函式中必須輸入兩地理資料，最終輸出結果的幾何型態取階層較低者，如輸入點與面的資料取交集，回傳結果將為點資料；輸入線與面之資料取交集，則回傳線資料。`st_intersection()`函式的程式碼撰寫如下：  
+
+`st_intersection(地理資料1, 地理資料2)`  
+
+在最終輸出的結果中，放置於函式中第一個參數者（地理資料1）出現於表格的左側，而函式中第二個參數（地理資料2）取交集後則合併於表格右側。  
+
+為具體說明交集的操作流程，在此以臺北市YouBike站點與臺北市村里界圖為例，擷取各站點所在的村里。若欲使用資料，請先自Github下載`TWspdata`套件，下載方式如下：  
+
+```{r TWspdata_download, echo=T, eval=F}
+install.packages(devtools)
+devtools::install_github("ChiaJung-Yeh/TWspdata")
+library(TWspdata)
+```
+
+## **實際範例**
+
+臺北市YouBike站點與臺北市村里交集之程式碼撰寫如下：  
+
+```{r youbike_intersection, echo=T, eval=F}
+# 臺北YouBike資料
+youbike=taipei_youbike[, c("SttnUID","StatnNm")]
+
+# 臺北村里資料
+village=taipei_village_map[, c("VILLCODE","COUNTYNAME","TOWNNAME","VILLNAME")]
+
+# 取兩地理資料之交集
+youbike_village=st_intersection(youbike, village)
+
+# 查看youbike_village資料
+youbike_village
+```
+
+```{r youbike_intersection_result, echo=F, eval=T, warning=F}
+youbike_village=st_intersection(taipei_youbike[, c("SttnUID","StatnNm")], taipei_village_map[, c("VILLCODE","COUNTYNAME","TOWNNAME","VILLNAME")])
+datatable(st_drop_geometry(youbike_village), options=list(pageLength=10, scrollX=T,
+                                    headerCallback = DT::JS(
+    "function(thead) {",
+    "  $(thead).css('font-size', '0.7em');",
+    "}"
+  )))%>%
+  formatStyle(columns=c(1:6), fontSize='80%')
+```
+
+其他關於`st_intersection()`函式的操作煩請參考[這裡](https://chiajung-yeh.github.io/Spatial-Analysis/spatial-operations.html#clipping)。
+
+
+

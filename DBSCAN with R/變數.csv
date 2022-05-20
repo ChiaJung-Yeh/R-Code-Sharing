@@ -1,0 +1,48 @@
+,public,private,PPP,urban,urban or rural,rural,virtual,PT stop,D2D,Door-to-station,virtual-to-station,fixed route,DRT,mixed route,phone,web,APP
+BT let's go,1,0,0,1,0,0,0,1,0,0,0,1,0,0,1,1,1
+Mobility bus,1,0,0,1,0,0,0,0,1,0,0,0,1,0,1,1,1
+Edmonton Transit Service,1,0,0,1,0,0,0,1,0,0,0,1,0,0,1,1,1
+NRT OnDemand,1,0,0,0,0,1,0,1,1,0,0,0,0,1,1,0,1
+Chair-A-Van,1,0,0,0,0,1,1,0,0,0,0,1,0,0,1,0,1
+Wheel-Trans,1,0,0,1,0,0,0,0,1,0,0,0,1,0,1,0,0
+Dial-a-Ride transit,1,0,0,,,,0,1,1,0,0,0,0,1,1,0,1
+Transit Plus (Handi-Transit),1,0,0,1,0,0,0,0,1,0,0,0,1,0,1,1,0
+ Kan-go,1,0,0,,,,0,0,0,1,0,0,0,1,1,1,0
+Telebus,1,0,0,0,0,1,0,0,1,1,0,0,0,1,1,1,0
+Keolis Downer,1,0,0,1,0,0,1,0,0,0,0,1,0,0,1,1,1
+Butler Area Rural Transit (BART),1,0,0,0,0,1,0,0,1,0,0,0,1,0,1,1,0
+"Bay area rapid transit
+(BART)",1,0,0,1,0,0,0,1,0,1,0,0,0,1,1,1,1
+"FlexRide
+(Call-n-Ride service)",1,0,0,,,,1,1,0,1,0,0,0,1,1,1,1
+Flex Service,1,0,0,0,1,0,0,0,1,1,0,0,0,1,1,1,0
+NeighborLink,1,0,0,0,0,1,0,0,1,1,0,0,1,0,1,1,1
+Pace On Demand,1,0,0,0,1,0,0,1,0,0,0,1,0,0,1,1,1
+Ride on Flex,1,0,0,1,0,0,1,0,0,0,0,1,0,0,1,1,1
+Access-A-Ride,1,0,0,,,,0,0,1,0,0,0,1,0,1,1,0
+Bee-Line Paratransit,1,0,0,,,,1,0,1,0,0,1,1,0,1,0,0
+Qualla Community Resident Transportation,,,,,,,1,0,1,0,0,1,1,0,1,0,0
+Night Shuttle,,,,0,0,1,0,0,1,0,0,0,1,0,1,0,0
+Rural General Public Program,,,,0,0,1,0,0,1,0,0,0,1,0,1,0,0
+DARTS (Dial-A-Ride Transportation Services),,,,,,,0,1,1,0,0,0,0,1,1,0,0
+Rural General Public (RGP),,,,,,,0,0,1,0,0,0,1,0,1,0,0
+Tel-A-Ride Service,,,,,,,1,0,0,0,0,1,0,0,1,0,1
+MetroAccess Paratransit,1,0,0,,,,0,0,1,0,0,0,1,0,1,1,0
+Netliner,1,0,0,0,1,0,1,1,0,0,0,1,0,0,1,1,0
+Allygator ,0,1,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1
+Berlkoenig,0,0,1,1,0,0,1,1,0,0,0,1,0,0,0,0,1
+EcoBus,0,0,1,1,0,1,0,0,1,0,0,0,1,0,1,1,1
+Ioki Shuttle ,0,0,1,0,1,0,0,0,0,1,0,0,0,1,0,0,1
+MOIA ,0,0,1,1,0,0,1,0,0,0,0,1,0,0,0,0,0
+IsarTiger,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,0,1
+SSB Flex,0,0,1,1,0,0,1,0,0,0,0,1,0,0,0,0,1
+Flexigo,0,0,1,0,1,0,0,0,1,1,0,0,0,1,0,1,1
+R?sa'Est,0,0,1,0,1,0,0,0,0,0,1,1,0,0,1,1,1
+Chronopro,0,0,1,1,1,0,0,0,0,1,0,0,0,1,0,0,0
+ViaVan,0,1,0,1,0,0,1,0,0,0,0,1,0,0,0,0,0
+Breng flex,0,0,1,,,,1,1,0,0,0,1,0,0,1,0,1
+Slide,0,1,0,1,0,0,1,0,0,0,0,1,0,0,0,0,1
+London Smart Ride ,0,1,0,1,0,0,1,0,0,0,0,1,0,0,0,0,1
+ViaVan,,,,,,,1,0,0,0,0,1,0,0,0,0,0
+Chariot,0,1,0,0,1,0,0,1,0,0,0,1,0,0,0,0,1
+PickMeUp,0,1,0,1,0,0,1,0,0,0,0,1,0,0,0,0,1

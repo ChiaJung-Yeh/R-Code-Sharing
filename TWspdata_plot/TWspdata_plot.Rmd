@@ -1,0 +1,184 @@
+---
+title: "地圖繪製與地理資料建構"
+author: "Chia-Jung, Yeh"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+<style type="text/css">
+
+body{
+font-size: 18px;
+font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+td {  /* Table  */
+  font-size: 8px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+h1.title {
+  font-size: 38px;
+  color: DarkRed;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+}
+h1 { /* Header 1 */
+  font-size: 28px;
+      font-family:"Times New Roman","標楷體",Georgia,Serif;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+    font-family:"Times New Roman","標楷體",Georgia,Serif;
+    color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+  color: DarkBlue;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+.blogbody{
+font-size:17px;
+  font-family:"Times New Roman","標楷體",Georgia,Serif;
+line-height: 150%;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(TWspdata)
+library(dplyr)
+library(sf)
+library(ggplot2)
+```
+
+
+# **臺灣百岳及人口地圖**
+**細節說明：**  
+1. `windowsFonts`是用來設定字體的函式。  
+2. `scale_＊_distiller`是用來繪製連續型分布的函式，該函式的優勢是可以直接設定調色板（`palette`）。  
+3. 利用`arrange(taiwan_peak, Z)`將高程升冪排列，即可使高度較高的山峰疊在高度較低的山峰上，才不會因高低交錯而影響視覺化呈現。  
+4. `theme_void`是用來將所有經緯度座標軸和底圖刪除的函式。  
+5. 以下程式碼中`scale_color_distiller`用來使點的顏色依高程繪製；`scale_size_continuous`用來使點的大小依高程繪製，預設情況下會產生兩個圖例。若欲將兩圖例合併，可利用`guides(color=guide_legend(), size=guide_legend())`解決。參考文件在[這裡](https://stackoverflow.com/questions/32649426/ggplot-combining-size-and-color-in-legend)。  
+
+
+```{r peak_plot, echo=T, eval=T, error=T, fig.width=6, fig.height=8, dpi=100, fig.align="center"}
+windowsFonts(A=windowsFont("標楷體"))
+windowsFonts(B=windowsFont("Times New Roman"))
+
+ggplot()+
+  geom_sf(data=tw_county_main, aes(fill=POP/10000))+
+  scale_fill_distiller(palette="YlOrRd", direction=1, name="人口數(萬)")+
+  geom_sf(data=arrange(taiwan_peak, Z), aes(color=Z,size=Z))+
+  scale_color_distiller(palette="YlGn", direction=1, name="高程")+
+  scale_size_continuous(range=c(1,6), name="高程")+
+  theme_void()+
+  theme(legend.title=element_text(size=15, family="A"),
+        legend.text=element_text(size=12, family="B"))+
+  guides(color=guide_legend(), size=guide_legend())
+```
+
+
+# **文字檔轉換為地理資料**
+
+從網路上下載的文字檔若遇轉換為地理資料，通常原始資料型態會是以下兩種類型：  
+1. 資料中含有[WKT格式](https://chiajung-yeh.github.io/Spatial-Analysis/basic-knowledge-on-gis.html#well-known-text-wkt)的空間資料（如`TWspdata`套件中的hsinchu_bus_route）  
+2. 資料中含有經緯度資料，分別儲存與兩欄位中（如`TWspdata`套件中的hsinchu_scenicSpot）  
+
+將純文字資料轉換為地理資料的方法，程式碼撰寫架構如下：  
+
+```{r code_flow, echo=T, eval=F, error=T, fig.width=6, fig.height=8, dpi=100, fig.align="center"}
+# 利用st_as_sf()函式將WKT格式轉換為空間資料
+DATA$geometry=st_as_sfc(DATA$geometry)
+
+# 再將整個資料轉換為地理資料，並設定參考座標格式
+DATA=st_sf(DATA, crs=)
+```
+
+以下分別介紹兩種資料類型轉換為地理資料的方式。  
+
+## 含有WKT的資料
+
+原始的hsinchu_bus_route資料是文字格式，其中空間資料以WKT格式儲存於Geometry欄位。  
+
+```{r WKT_data1, echo=T, eval=T, error=T, fig.width=6, fig.height=8, dpi=100, fig.align="center"}
+# 檢查原始資料型態
+class(hsinchu_bus_route)
+```
+
+接著利用`st_as_sfc()`函式將Geometry欄位之文字資料，轉換為具空間意義的資料。  
+
+```{r WKT_data2, echo=T, eval=T, error=T, fig.width=6, fig.height=8, dpi=100, fig.align="center"}
+# 轉換純文字為空間資料
+hsinchu_bus_route$Geometry=st_as_sfc(hsinchu_bus_route$Geometry)
+```
+
+此時我們只是將Geometry欄位轉換為空間資料，但整個hsinchu_bus_route資料的格式仍然是`data.frame`。  
+
+```{r WKT_data3, echo=T, eval=T, error=T, fig.width=6, fig.height=8, dpi=100, fig.align="center"}
+class(hsinchu_bus_route)
+```
+
+因此，最後必須將hsinchu_bus_route轉換為地理資料，並設定CRS。
+
+```{r WKT_data4, echo=T, eval=T, error=T, fig.width=6, fig.height=8, dpi=100, fig.align="center"}
+# 原始資料採用經緯度記錄，故設定為全球通用的座標參考系統（EPSG:4326）
+hsinchu_bus_route=st_sf(hsinchu_bus_route, crs=4326)
+```
+
+繪圖結果如下：
+```{r WKT_data5, echo=T, eval=T, error=T, fig.width=4, fig.height=3, dpi=100, fig.align="center"}
+ggplot()+
+  geom_sf(data=hsinchu_bus_route)+
+  theme_void()
+```
+
+
+## 含有經緯度欄位的資料
+
+原始的hsinchu_scenicSpot資料是文字格式，其中空間資料以經緯度形式儲存於兩欄位（PositionLat、PositionLon）。  
+
+```{r lonlat_data1, echo=T, eval=T, error=T, fig.width=6, fig.height=8, dpi=100, fig.align="center"}
+# 檢查原始資料型態
+class(hsinchu_scenicSpot)
+
+# 查看前六筆資料
+head(hsinchu_scenicSpot)
+```
+
+由於資料中並無geometry欄位，應先自行建立一個WKT格式。  
+點資料的WKT格式為「`POINT (X Y)`」。  
+
+```{r lonlat_data2, echo=T, eval=T, error=T, fig.width=6, fig.height=8, dpi=100, fig.align="center"}
+hsinchu_scenicSpot$geometry=paste0("POINT(", hsinchu_scenicSpot$PositionLon, " ", hsinchu_scenicSpot$PositionLat, ")")
+```
+
+接著將新建立的WKT格式轉換為空間資料。  
+
+```{r lonlat_data3, echo=T, eval=T, error=T, fig.width=6, fig.height=8, dpi=100, fig.align="center"}
+hsinchu_scenicSpot$geometry=st_as_sfc(hsinchu_scenicSpot$geometry)
+
+# 查看結果
+head(hsinchu_scenicSpot)
+```
+
+最後必須將hsinchu_scenicSpot轉換為地理資料，並設定CRS。
+
+```{r lonlat_data4, echo=T, eval=T, error=T, fig.width=6, fig.height=8, dpi=100, fig.align="center"}
+# 原始資料採用經緯度記錄，故設定為全球通用的座標參考系統（EPSG:4326）
+hsinchu_scenicSpot=st_sf(hsinchu_scenicSpot, crs=4326)
+```
+
+繪圖結果如下：
+```{r lonlat_data5, echo=T, eval=T, error=T, fig.width=4, fig.height=3, dpi=100, fig.align="center"}
+ggplot()+
+  geom_sf(data=filter(taiwan_town, COUNTYNAME=="新竹市"), fill="#ADADAD", color="#E0E0E0")+
+  geom_sf(data=hsinchu_scenicSpot)+
+  theme_void()
+```
+
