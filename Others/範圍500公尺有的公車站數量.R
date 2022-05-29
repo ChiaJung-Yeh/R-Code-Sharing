@@ -2,20 +2,24 @@ library(TWspdata)
 library(sf)
 library(dplyr)
 
-# æ“·å–æ–°ç«¹å¸‚æ‘é‡Œåœ–è³‡
-hsinchu=filter(taiwan_village, COUNTYNAME=="æ–°ç«¹å¸‚")%>%
+# Â^¨ú·s¦Ë¥«§ø¨½¹Ï¸ê
+hsinchu=filter(taiwan_village, COUNTYNAME=="·s¦Ë¥«")%>%
   st_transform(crs=3826)
 
-# æ“·å–æ–°ç«¹å¸‚å„æ‘é‡Œä¸­å¿ƒé»ž
+# Â^¨ú·s¦Ë¥«¦U§ø¨½¤¤¤ßÂI
 hsinchu_center=st_centroid(hsinchu)
 
-# å°‡ä¸­å¿ƒé»žå–500å…¬å°ºç’°åŸŸ
+# ±N¤¤¤ßÂI¨ú500¤½¤ØÀô°ì
 vil_buf=st_buffer(hsinchu_center, 500)
 
-# å°‡æ‘é‡Œä¸­å¿ƒ500å…¬å°ºç’°åŸŸèˆ‡æ–°ç«¹å¸‚å…¬è»Šç«™ç‰Œå–äº¤é›†
+# ±N§ø¨½¤¤¤ß500¤½¤ØÀô°ì»P·s¦Ë¥«¤½¨®¯¸µP¨ú¥æ¶°
 vil_stop=st_intersection(vil_buf, hs_bus_stop)
 
-# ä¾æ“šæ‘é‡Œåç¨±ï¼Œçµ±è¨ˆå„æ‘é‡Œçš„å…¬è»Šç«™ç‰Œæ•¸
+# ¨Ì¾Ú§ø¨½¦WºÙ¡A²Î­p¦U§ø¨½ªº¤½¨®¯¸µP¼Æ
 vil_stop=group_by(st_drop_geometry(hsinchu_vil_stop), TOWNNAME, VILLNAME)%>%
   summarise(count=n())
 
+
+# ®Ú¾Ú«ü©w¸g½n«×ªº½d³ò500¤½¤Ø¦¬¶°
+# «ü©w¸g½n«×
+lonlat=c("")
