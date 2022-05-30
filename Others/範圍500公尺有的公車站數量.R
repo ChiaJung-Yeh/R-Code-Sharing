@@ -47,8 +47,8 @@ nrow(lonlat_stop)
 
 
 #---通用性寫法---#
-county=filter(taiwan_village, COUNTYNAME=="臺北市")%>%
-  st_transform(crs=3826)
+# county=filter(taiwan_village, COUNTYNAME=="臺北市")%>%
+#   st_transform(crs=3826)
 
 # 登入介接TDX的鑰匙
 client_id="robert1328.mg10-5fef152e-ee4f-4cfb"
@@ -60,7 +60,7 @@ bus_stop=Bus_StopOfRoute(access_token, "Taipei", dtype="sf")
 bus_stop=st_transform(bus_stop, crs=3826)
 
 # 指定經緯度 (經度放前，緯度放後)
-lonlat=c(121.53884075275222, 25.05408364662618)
+lonlat=c(121.51187216536309, 25.047398014776)
 
 lonlat=st_sfc(st_point(lonlat))%>%
   st_sf(crs=4326)%>%
@@ -75,4 +75,10 @@ lonlat_stop=st_intersection(lonlat_buf, bus_stop)
 # 統計該指定經緯度500公尺範圍內的公車站牌數
 nrow(lonlat_stop)
 
+library(tmap)
+tmap_mode("view")
+tm_shape(lonlat_buf)+
+  tm_polygons()+
+  tm_shape(lonlat_stop)+
+  tm_dots()
 
