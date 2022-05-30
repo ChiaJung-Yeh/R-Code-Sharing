@@ -1,7 +1,13 @@
 library(TWspdata)
 library(sf)
 library(dplyr)
+library(TDX)
 
+# 請先下載TDX套件 這個套件可以用來介接公車站牌
+devtools::install_github("ChiaJung-Yeh/NYCU_TDX", force=T)
+
+
+#---擷取各村里中心環域500公尺內的公車站牌數---#
 # 擷取新竹市村里圖資
 hsinchu=filter(taiwan_village, COUNTYNAME=="新竹市")%>%
   st_transform(crs=3826)
@@ -21,9 +27,8 @@ vil_stop=group_by(st_drop_geometry(hsinchu_vil_stop), TOWNNAME, VILLNAME)%>%
 
 
 
-
 #---根據指定經緯度的範圍500公尺收集---#
-# 指定經緯度 (經度放錢，緯度放後)
+# 指定經緯度 (經度放前，緯度放後)
 lonlat=c(120.97153962847077, 24.8019562213021)
 
 lonlat=st_sfc(st_point(lonlat))%>%
@@ -35,6 +40,37 @@ lonlat_buf=st_buffer(lonlat, 500)
 
 # 將指定經緯度500公尺環域與新竹市公車站牌取交集
 lonlat_stop=st_intersection(lonlat_buf, hs_bus_stop)
+
+# 統計該指定經緯度500公尺範圍內的公車站牌數
+nrow(lonlat_stop)
+
+
+
+#---通用性寫法---#
+county=filter(taiwan_village, COUNTYNAME=="臺北市")%>%
+  st_transform(crs=3826)
+
+# 登入介接TDX的鑰匙
+client_id="robert1328.mg10-5fef152e-ee4f-4cfb"
+client_secret="591fe8aa-6fdc-4c3b-9663-428a62ec8863"
+access_token=get_token(client_id, client_secret)
+
+bus_stop=Bus_StopOfRoute(access_token, "Taipei", dtype="sf")
+
+bus_stop=st_transform(bus_stop, crs=3826)
+
+# 指定經緯度 (經度放前，緯度放後)
+lonlat=c(121.53884075275222, 25.05408364662618)
+
+lonlat=st_sfc(st_point(lonlat))%>%
+  st_sf(crs=4326)%>%
+  st_transform(crs=3826)
+
+# 將指定經緯度取500公尺環域
+lonlat_buf=st_buffer(lonlat, 500)
+
+# 將指定經緯度500公尺環域與新竹市公車站牌取交集
+lonlat_stop=st_intersection(lonlat_buf, bus_stop)
 
 # 統計該指定經緯度500公尺範圍內的公車站牌數
 nrow(lonlat_stop)
