@@ -75,10 +75,14 @@ lonlat_stop=st_intersection(lonlat_buf, bus_stop)
 # 統計該指定經緯度500公尺範圍內的公車站牌數
 nrow(lonlat_stop)
 
+# 若只需要單純看站牌，而不要考量路線:
+length(unique(lonlat_stop$StationID))
+
+
 library(tmap)
 tmap_mode("view")
 tm_shape(lonlat_buf)+
   tm_polygons()+
   tm_shape(lonlat_stop)+
-  tm_dots()
+  tm_dots(col="StationID")
 
