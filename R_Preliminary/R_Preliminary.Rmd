@@ -799,7 +799,7 @@ head(world_mut1[, c("name_long","continent","pop","area_km2","pop_dens")])
 * **Function & Argument**
 
 ```{r ifelse-function, echo=T, eval=F}
-ifelse(condition, do when true, do when false)
+ifelse(condition, [do when true], [do when false])
 ```
 
 
@@ -912,7 +912,7 @@ Merge two different data by referencing the key (terminology in database managem
 left_join(DATA1, DATA2, by=c("col1"="col2"))
 ```
 
-It means that using `col1` in `DATA1` and `col2` in `DATA2` to merge two data.  
+It means that using `col1` in `DATA1` and `col2` in `DATA2` to be the ket referencee, in order to merge two data.  
 
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Left join two data**</p>  
@@ -923,7 +923,7 @@ Here we first read the coffee production data of the world. The code is as follo
 coffee=read.csv("https://raw.githubusercontent.com/ChiaJung-Yeh/R-Code-Sharing/main/R_Preliminary/coffee.csv")
 ```
 
-Then we can merge these two data by using the country name. Note that the country name in data `world` and `world_coffee` are all `name_long`, and hence, we can simply set `by="`, or even without setting it (the package will automatically find the common name to be the key.)  
+Then we can merge these two data by using the country name. Note that the country name in data `world` and `world_coffee` are all `name_long`, and hence, we can simply set `by="name_long"`, or even without setting it (the package will automatically find the common name to be the key.)  
 
 ```{r leftjoin1, echo=T, eval=T}
 # left join two data
@@ -983,7 +983,7 @@ Rename the column name of the data.
 rename(DATA, var_new=var_old)
 ```
 
-The function above would replace the column name `var_old` with `var_new` in the data.  
+The function above would replace the column name `var_new` with `var_old` in the data.  
 
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Rename by `rename()`**</p>  
