@@ -1,0 +1,178 @@
+"iso_a2","name_long","continent","region_un","subregion","type","area_km2","pop","lifeExp","gdpPercap"
+"FJ","Fiji","Oceania","Oceania","Melanesia","Sovereign country",19289.9707329765,885806,69.96,8222.25378436842
+"TZ","Tanzania","Africa","Africa","Eastern Africa","Sovereign country",932745.792357074,52234869,64.163,2402.09940362843
+"EH","Western Sahara","Africa","Africa","Northern Africa","Indeterminate",96270.6010408472,NA,NA,NA
+"CA","Canada","North America","Americas","Northern America","Sovereign country",10036042.9767873,35535348,81.9530487804878,43079.1425247165
+"US","United States","North America","Americas","Northern America","Country",9510743.74482458,318622525,78.8414634146341,51921.9846391384
+"KZ","Kazakhstan","Asia","Asia","Central Asia","Sovereign country",2729810.51298781,17288285,71.62,23587.3375151466
+"UZ","Uzbekistan","Asia","Asia","Central Asia","Sovereign country",461410.258459096,30757700,71.039,5370.86580208835
+"PG","Papua New Guinea","Oceania","Oceania","Melanesia","Sovereign country",464520.072464586,7755785,65.23,3709.08164370316
+"ID","Indonesia","Asia","Asia","South-Eastern Asia","Sovereign country",1819251.32898731,255131116,68.856,10003.0890293448
+"AR","Argentina","South America","Americas","South America","Sovereign country",2784468.58938384,42981515,76.252,18797.5479465897
+"CL","Chile","South America","Americas","South America","Sovereign country",814844.220487802,17613798,79.117,22195.2743713617
+"CD","Democratic Republic of the Congo","Africa","Africa","Middle Africa","Sovereign country",2323492.47746214,73722860,58.782,785.347340663008
+"SO","Somalia","Africa","Africa","Eastern Africa","Sovereign country",484332.792984678,13513125,55.467,NA
+"KE","Kenya","Africa","Africa","Eastern Africa","Sovereign country",590836.914195733,46024250,66.242,2753.23613475312
+"SD","Sudan","Africa","Africa","Northern Africa","Sovereign country",1850885.56479243,37737913,64.002,4188.33481399507
+"TD","Chad","Africa","Africa","Middle Africa","Sovereign country",1271694.59820398,13569438,52.204,2076.65000798778
+"HT","Haiti","North America","Americas","Caribbean","Sovereign country",28540.5459842261,10572466,62.757,1652.85480345734
+"DO","Dominican Republic","North America","Americas","Caribbean","Sovereign country",48157.8742821646,10405844,73.483,12663.0422473566
+"RU","Russian Federation","Europe","Europe","Eastern Europe","Sovereign country",17018507.4094666,143819666,70.7436585365854,25284.5862019855
+"BS","Bahamas","North America","Americas","Caribbean","Sovereign country",15584.7908248632,382169,75.379,28456.8165292476
+"FK","Falkland Islands","South America","Americas","South America","Dependency",16363.7987423901,NA,NA,NA
+"NO","Norway","Europe","Europe","Northern Europe","Sovereign country",397994.628980977,NA,NA,NA
+"GL","Greenland","North America","Americas","Northern America","Country",2206644.43953262,56295,NA,NA
+"TF","French Southern and Antarctic Lands","Seven seas (open ocean)","Seven seas (open ocean)","Seven seas (open ocean)","Dependency",11602.5718467462,NA,NA,NA
+"TL","Timor-Leste","Asia","Asia","South-Eastern Asia","Sovereign country",14714.9313315426,1212814,68.285,6262.90551556596
+"ZA","South Africa","Africa","Africa","Southern Africa","Sovereign country",1216400.83108031,54539571,60.993,12389.7146679241
+"LS","Lesotho","Africa","Africa","Southern Africa","Sovereign country",27505.6549786909,2145785,53.268,2677.19807805197
+"MX","Mexico","North America","Americas","Central America","Sovereign country",1969480.30676826,124221600,76.753,16622.5970457658
+"UY","Uruguay","South America","Americas","South America","Sovereign country",176853.635919616,3419546,77.19,19827.5649886027
+"BR","Brazil","South America","Americas","South America","Sovereign country",8508557.09182573,204213133,75.042,15374.2615071807
+"BO","Bolivia","South America","Americas","South America","Sovereign country",1085269.59559136,10562159,68.357,6324.82725807651
+"PE","Peru","South America","Americas","South America","Sovereign country",1309699.63635968,30973354,74.518,11547.8342162709
+"CO","Colombia","South America","Americas","South America","Sovereign country",1151882.92596349,47791911,74.022,12715.9673914398
+"PA","Panama","North America","Americas","Central America","Sovereign country",75265.4490305216,3903986,77.61,20017.9943624961
+"CR","Costa Rica","North America","Americas","Central America","Sovereign country",53832.1357021123,4757575,79.44,14372.4007814474
+"NI","Nicaragua","North America","Americas","Central America","Sovereign country",129540.211674483,6013997,74.884,4784.83046366078
+"HN","Honduras","North America","Americas","Central America","Sovereign country",113789.774793235,8809216,73.181,4231.32506716223
+"SV","El Salvador","North America","Americas","Central America","Sovereign country",20893.3402330773,6281189,73.015,6890.72322429183
+"GT","Guatemala","North America","Americas","Central America","Sovereign country",109459.048786204,15923559,72.869,7147.42922806486
+"BZ","Belize","North America","Americas","Central America","Sovereign country",22045.4508313613,351694,70.027,7999.57369198528
+"VE","Venezuela","South America","Americas","South America","Sovereign country",908499.070492869,30738378,74.196,16745.0219796981
+"GY","Guyana","South America","Americas","South America","Sovereign country",209801.857246846,763393,66.425,6906.01230864481
+"SR","Suriname","South America","Americas","South America","Sovereign country",144268.722604462,547928,71.138,15306.6924367639
+"FR","France","Europe","Europe","Western Europe","Country",644847.882258842,NA,NA,NA
+"EC","Ecuador","South America","Americas","South America","Sovereign country",250747.109536984,15903112,75.879,10901.4185562194
+"PR","Puerto Rico","North America","Americas","Caribbean","Dependency",9224.66316707476,3534874,79.3901219512195,35066.0463763697
+"JM","Jamaica","North America","Americas","Caribbean","Sovereign country",12460.5868709093,2862087,75.689,8051.24402830602
+"CU","Cuba","North America","Americas","Caribbean","Sovereign country",114866.218150043,11439767,79.415,NA
+"ZW","Zimbabwe","Africa","Africa","Eastern Africa","Sovereign country",376328.488742711,15411675,59.36,1925.138698418
+"BW","Botswana","Africa","Africa","Southern Africa","Sovereign country",591912.017166329,2168573,64.78,15914.6702328332
+"NA","Namibia","Africa","Africa","Southern Africa","Sovereign country",824886.560992482,2370992,62.981,9617.3969565111
+"SN","Senegal","Africa","Africa","Western Africa","Sovereign country",194390.438881923,14546111,66.376,2218.55191733521
+"ML","Mali","Africa","Africa","Western Africa","Sovereign country",1235561.37340316,16962846,57.007,1865.16062183071
+"MR","Mauritania","Africa","Africa","Western Africa","Sovereign country",1054107.1940836,4063920,62.907,3655.38850923143
+"BJ","Benin","Africa","Africa","Western Africa","Sovereign country",116998.712578633,10286712,60.373,2001.0772890116
+"NE","Niger","Africa","Africa","Western Africa","Sovereign country",1182269.64800007,19148219,59.228,904.456729989966
+"NG","Nigeria","Africa","Africa","Western Africa","Sovereign country",905071.739171952,176460502,52.549,5671.9006010195
+"CM","Cameroon","Africa","Africa","Middle Africa","Sovereign country",460324.701614163,22239904,57.111,3196.36152634263
+"TG","Togo","Africa","Africa","Western Africa","Sovereign country",60966.9622339568,7228915,59.601,1315.3402595533
+"GH","Ghana","Africa","Africa","Western Africa","Sovereign country",243473.120281533,26962563,62.154,3868.60089371873
+"CI","Cote d'Ivoire","Africa","Africa","Western Africa","Sovereign country",329825.951440485,22531350,52.52,3054.53487386428
+"GN","Guinea","Africa","Africa","Western Africa","Sovereign country",239565.079458458,11805509,58.846,1734.73674695657
+"GW","Guinea-Bissau","Africa","Africa","Western Africa","Sovereign country",36191.8856963154,1725744,56.598,1398.25480632738
+"LR","Liberia","Africa","Africa","Western Africa","Sovereign country",98206.7829620829,4390737,61.527,804.719886747093
+"SL","Sierra Leone","Africa","Africa","Western Africa","Sovereign country",75980.3314665435,7079162,50.951,1692.14206707555
+"BF","Burkina Faso","Africa","Africa","Western Africa","Sovereign country",271593.671943161,17585977,59.457,1582.33369667322
+"CF","Central African Republic","Africa","Africa","Middle Africa","Sovereign country",621860.349185054,4515392,50.621,597.135168986395
+"CG","Republic of the Congo","Africa","Africa","Middle Africa","Sovereign country",339681.855452815,4871101,63.536,5538.05294137178
+"GA","Gabon","Africa","Africa","Middle Africa","Sovereign country",269475.797919465,1875713,65.211,16678.6381326502
+"GQ","Equatorial Guinea","Africa","Africa","Middle Africa","Sovereign country",27120.5747694609,1129424,57.18,31542.5107726021
+"ZM","Zambia","Africa","Africa","Eastern Africa","Sovereign country",751921.215016539,15620974,60.775,3632.50375331402
+"MW","Malawi","Africa","Africa","Eastern Africa","Sovereign country",111197.018347598,17068838,61.932,1090.3672076732
+"MZ","Mozambique","Africa","Africa","Eastern Africa","Sovereign country",810994.757216461,27212382,57.099,1079.82386564737
+"SZ","eSwatini","Africa","Africa","Southern Africa","Sovereign country",18118.6341282849,1295097,56.287,7870.97074814257
+"AO","Angola","Africa","Africa","Middle Africa","Sovereign country",1245463.74769785,26920466,60.858,6257.15287433489
+"BI","Burundi","Africa","Africa","Eastern Africa","Sovereign country",26238.9478592737,9891790,56.688,803.172837396172
+"IL","Israel","Asia","Asia","Western Asia","Country",22991.165807789,8215700,82.1536585365854,31702.0835366295
+"LB","Lebanon","Asia","Asia","Western Asia","Sovereign country",10099.0030328829,5603279,79.231,13831.3752293893
+"MG","Madagascar","Africa","Africa","Eastern Africa","Sovereign country",589382.827011519,23589801,65.133,1372.02096124513
+"PS","Palestine","Asia","Asia","Western Asia","Disputed",5037.10382587155,4294682,73.126,4319.52828287882
+"GM","The Gambia","Africa","Africa","Western Africa","Sovereign country",14031.2844514589,1917852,60.707,1550.21843235512
+"TN","Tunisia","Africa","Africa","Northern Africa","Sovereign country",156237.321647096,11143908,75.335,10767.0276518537
+"DZ","Algeria","Africa","Africa","Northern Africa","Sovereign country",2315916.65788588,39113313,75.641,13483.3378622219
+"JO","Jordan","Asia","Asia","Western Asia","Sovereign country",89207.1369063166,8809306,74.034,8622.18546801292
+"AE","United Arab Emirates","Asia","Asia","Western Asia","Sovereign country",79880.7382809669,9070867,76.948,63943.1858285789
+"QA","Qatar","Asia","Asia","Western Asia","Sovereign country",11327.854664807,2374419,77.888,120860.06755829
+"KW","Kuwait","Asia","Asia","Western Asia","Sovereign country",16652.1196912198,3782450,74.458,70832.3683645207
+"IQ","Iraq","Asia","Asia","Western Asia","Sovereign country",436965.03416826,35006080,69.458,14838.3829483763
+"OM","Oman","Asia","Asia","Western Asia","Sovereign country",309302.033595231,3960925,76.578,40365.2732623193
+"VU","Vanuatu","Oceania","Oceania","Melanesia","Sovereign country",7490.040146716,258850,71.709,2892.34160435097
+"KH","Cambodia","Asia","Asia","South-Eastern Asia","Sovereign country",182235.977782045,15270790,68.251,3124.31929344274
+"TH","Thailand","Asia","Asia","South-Eastern Asia","Sovereign country",510125.56979289,68416772,74.895,14857.202932021
+"LA","Lao PDR","Asia","Asia","South-Eastern Asia","Sovereign country",229080.422295565,6576397,65.975,5436.48264275006
+"MM","Myanmar","Asia","Asia","South-Eastern Asia","Sovereign country",679573.994237083,51924182,66.285,4770.01209867368
+"VN","Vietnam","Asia","Asia","South-Eastern Asia","Sovereign country",335990.801728306,92544915,75.855,5264.82809971072
+"KP","Dem. Rep. Korea","Asia","Asia","Eastern Asia","Sovereign country",125679.216030188,25116363,71.179,NA
+"KR","Republic of Korea","Asia","Asia","Eastern Asia","Sovereign country",99044.3668304894,50746659,81.7219512195122,33425.6895931418
+"MN","Mongolia","Asia","Asia","Eastern Asia","Sovereign country",1544322.15019105,2923896,68.847,11348.6473412397
+"IN","India","Asia","Asia","Southern Asia","Sovereign country",3142892.09769282,1293859294,68.021,5385.14181406703
+"BD","Bangladesh","Asia","Asia","Southern Asia","Sovereign country",133782.141414655,159405279,71.803,2973.0415646346
+"BT","Bhutan","Asia","Asia","Southern Asia","Sovereign country",39377.4020057345,776448,69.43,7366.42412644897
+"NP","Nepal","Asia","Asia","Southern Asia","Sovereign country",150706.871321559,28323241,69.511,2266.18429824848
+"PK","Pakistan","Asia","Asia","Southern Asia","Sovereign country",874119.998315395,185546257,66.139,4576.2270153496
+"AF","Afghanistan","Asia","Asia","Southern Asia","Sovereign country",652270.070308025,32758020,62.895,1838.96024371997
+"TJ","Tajikistan","Asia","Asia","Central Asia","Sovereign country",138111.759254274,8362745,70.69,2546.50048351137
+"KG","Kyrgyzstan","Asia","Asia","Central Asia","Sovereign country",195874.658497004,5835500,70.4024390243902,3181.64216292265
+"TM","Turkmenistan","Asia","Asia","Central Asia","Sovereign country",480809.521855032,5466241,67.552,14332.3657698371
+"IR","Iran","Asia","Asia","Southern Asia","Sovereign country",1617559.0402466,78411092,75.466,16924.2006778247
+"SY","Syria","Asia","Asia","Western Asia","Sovereign country",185004.125494595,19203090,69.817,NA
+"AM","Armenia","Asia","Asia","Western Asia","Sovereign country",28656.6007515336,2906220,74.255,7971.11792762162
+"SE","Sweden","Europe","Europe","Northern Europe","Sovereign country",450581.582203591,9696110,82.2536585365854,44167.6318669891
+"BY","Belarus","Europe","Europe","Eastern Europe","Sovereign country",208969.829718131,9474511,72.9707317073171,17944.2098463253
+"UA","Ukraine","Europe","Europe","Eastern Europe","Sovereign country",572548.983743491,45271947,71.1865853658537,8243.47351509088
+"PL","Poland","Europe","Europe","Eastern Europe","Sovereign country",310402.33298673,38011735,77.6024390243903,24347.0736576846
+"AT","Austria","Europe","Europe","Western Europe","Sovereign country",85064.8951585954,8546356,81.490243902439,44320.5020125474
+"HU","Hungary","Europe","Europe","Eastern Europe","Sovereign country",92476.460365273,9866468,75.7634146341463,24161.4255236519
+"MD","Moldova","Europe","Europe","Eastern Europe","Sovereign country",32320.3917738368,3556397,71.258,4762.7808726743
+"RO","Romania","Europe","Europe","Eastern Europe","Sovereign country",238356.297115474,19908979,74.9609756097561,19677.5202527307
+"LT","Lithuania","Europe","Europe","Northern Europe","Sovereign country",63831.0914781956,2932367,74.5170731707317,26258.2100974103
+"LV","Latvia","Europe","Europe","Northern Europe","Sovereign country",63923.5330136017,1993782,74.1243902439024,22172.2535081352
+"EE","Estonia","Europe","Europe","Northern Europe","Sovereign country",44678.1968086173,1314545,77.0341463414634,27113.6859213723
+"DE","Germany","Europe","Europe","Western Europe","Sovereign country",357430.341206566,80982500,81.090243902439,43560.6192440775
+"BG","Bulgaria","Europe","Europe","Eastern Europe","Sovereign country",110216.875059118,7223938,74.4658536585366,16302.3205614307
+"GR","Greece","Europe","Europe","Southern Europe","Sovereign country",131964.646663977,10892413,81.3853658536585,24081.6305378246
+"TR","Turkey","Asia","Asia","Western Asia","Sovereign country",798849.164057534,77030628,75.239,22401.8804311394
+"AL","Albania","Europe","Europe","Southern Europe","Sovereign country",29694.8002916761,2889104,77.963,10701.1207857986
+"HR","Croatia","Europe","Europe","Southern Europe","Sovereign country",57530.8517530272,4238389,77.4780487804878,20334.4464738451
+"CH","Switzerland","Europe","Europe","Western Europe","Sovereign country",46185.2506729716,8188649,83.1975609756098,57218.0279263612
+"LU","Luxembourg","Europe","Europe","Western Europe","Sovereign country",2416.87048266498,556319,82.2292682926829,93655.3341630648
+"BE","Belgium","Europe","Europe","Western Europe","Sovereign country",30126.0378859233,11209057,81.2878048780488,41360.3955755286
+"NL","Netherlands","Europe","Europe","Western Europe","Country",40024.104481118,16865008,81.7073170731707,45668.4414721322
+"PT","Portugal","Europe","Europe","Southern Europe","Sovereign country",93408.5940991601,10401062,81.1219512195122,26023.6978492184
+"ES","Spain","Europe","Europe","Southern Europe","Sovereign country",502306.467818081,46480882,83.2292682926829,31195.4052422035
+"IE","Ireland","Europe","Europe","Northern Europe","Sovereign country",58457.5134141208,4657740,81.3487804878049,48898.3286615603
+"NC","New Caledonia","Oceania","Oceania","Melanesia","Dependency",23219.0117362846,268050,77.2528725957226,NA
+"SB","Solomon Islands","Oceania","Oceania","Melanesia","Sovereign country",24728.114237136,575504,70.113,2139.56074060145
+"NZ","New Zealand","Oceania","Oceania","Australia and New Zealand","Country",277627.604539654,4509700,81.4048780487805,34455.3312172237
+"AU","Australia","Oceania","Oceania","Australia and New Zealand","Country",7687613.84310903,23504138,82.3,43547.1974836868
+"LK","Sri Lanka","Asia","Asia","Southern Asia","Sovereign country",65370.3895242611,20771000,74.906,10650.3901782483
+"CN","China","Asia","Asia","Eastern Asia","Country",9409830.49343391,1364270000,75.932,12758.647789259
+"TW","Taiwan","Asia","Asia","Eastern Asia","Sovereign country",34345.7011138443,NA,NA,NA
+"IT","Italy","Europe","Europe","Southern Europe","Sovereign country",315104.851197605,60789140,83.090243902439,33945.8438783585
+"DK","Denmark","Europe","Europe","Northern Europe","Country",42759.9277031922,5643475,80.7,45057.0741699595
+"GB","United Kingdom","Europe","Europe","Northern Europe","Country",249986.395211549,64613160,81.3048780487805,38251.7924802929
+"IS","Iceland","Europe","Europe","Northern Europe","Sovereign country",107735.721363006,327386,82.8609756097561,41701.1372653816
+"AZ","Azerbaijan","Asia","Asia","Western Asia","Sovereign country",91113.2541543127,9535079,71.8,16715.1055213058
+"GE","Georgia","Asia","Asia","Western Asia","Sovereign country",69048.1605044603,3727000,72.951,8749.15618927352
+"PH","Philippines","Asia","Asia","South-Eastern Asia","Sovereign country",292256.939380041,100102249,68.813,6585.89594870884
+"MY","Malaysia","Asia","Asia","South-Eastern Asia","Sovereign country",338226.486563138,30228017,74.976,24194.6339084542
+"BN","Brunei Darussalam","Asia","Asia","South-Eastern Asia","Sovereign country",10700.3342457981,411704,76.917,76089.2865740815
+"SI","Slovenia","Europe","Europe","Southern Europe","Sovereign country",19118.1227179494,2061980,81.0780487804878,28417.656441512
+"FI","Finland","Europe","Europe","Northern Europe","Country",341242.33887092,5461512,81.1804878048781,39017.5372069548
+"SK","Slovakia","Europe","Europe","Eastern Europe","Sovereign country",47068.0820296185,5418649,76.8121951219512,27285.284673711
+"CZ","Czech Republic","Europe","Europe","Eastern Europe","Sovereign country",81207.6029294362,10525347,78.8243902439024,29119.6166119074
+"ER","Eritrea","Africa","Africa","Eastern Africa","Sovereign country",119319.584873889,NA,64.174,NA
+"JP","Japan","Asia","Asia","Eastern Asia","Sovereign country",404619.932853689,127276000,83.5878048780488,37337.3174057788
+"PY","Paraguay","South America","Americas","South America","Sovereign country",401335.916394788,6552584,72.913,8501.54353959203
+"YE","Yemen","Asia","Asia","Western Asia","Sovereign country",455915.007254186,26246327,64.523,3766.80525494897
+"SA","Saudi Arabia","Asia","Asia","Western Asia","Sovereign country",1920324.14608918,30776722,74.234,49958.4433361471
+"AQ","Antarctica","Antarctica","Antarctica","Antarctica","Indeterminate",12335956.0763551,NA,NA,NA
+NA,"Northern Cyprus","Asia","Asia","Western Asia","Sovereign country",3786.36450592132,NA,NA,NA
+"CY","Cyprus","Asia","Asia","Western Asia","Sovereign country",6207.00619061686,1152309,80.173,29786.3656529772
+"MA","Morocco","Africa","Africa","Northern Africa","Sovereign country",591718.98943203,34318082,75.309,7078.88148932392
+"EG","Egypt","Africa","Africa","Northern Africa","Sovereign country",996311.623193406,91812566,71.12,9879.79935855302
+"LY","Libya","Africa","Africa","Northern Africa","Sovereign country",1633720.7173726,6204108,71.659,16371.9021546442
+"ET","Ethiopia","Africa","Africa","Eastern Africa","Sovereign country",1132393.1671779,97366774,64.535,1424.52698442707
+"DJ","Djibouti","Africa","Africa","Eastern Africa","Sovereign country",21880.2505119017,912164,62.006,NA
+NA,"Somaliland","Africa","Africa","Eastern Africa","Indeterminate",167349.612740013,NA,NA,NA
+"UG","Uganda","Africa","Africa","Eastern Africa","Sovereign country",245768.479387209,38833338,59.224,1637.27508138464
+"RW","Rwanda","Africa","Africa","Eastern Africa","Sovereign country",23365.4111927782,11345357,66.188,1629.86886584829
+"BA","Bosnia and Herzegovina","Europe","Europe","Southern Europe","Sovereign country",50605.0748516557,3566002,76.561,10516.7864355965
+"MK","Macedonia","Europe","Europe","Southern Europe","Sovereign country",25062.2552860575,2077495,75.384,12298.4901835571
+"RS","Serbia","Europe","Europe","Southern Europe","Sovereign country",76388.6050646267,7130576,75.3365853658537,13112.9089581967
+"ME","Montenegro","Europe","Europe","Southern Europe","Sovereign country",13443.6780594717,621810,76.712,14796.6353955591
+"XK","Kosovo","Europe","Europe","Southern Europe","Sovereign country",11230.2616721538,1821800,71.0975609756098,8698.29155889883
+"TT","Trinidad and Tobago","North America","Americas","Caribbean","Sovereign country",7737.80985537389,1354493,70.426,31181.8211959284
+"SS","South Sudan","Africa","Africa","Eastern Africa","Sovereign country",624909.099085845,11530971,55.817,1935.87940008879

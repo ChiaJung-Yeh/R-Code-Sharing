@@ -21,7 +21,7 @@ font-size: 16px;
 font-family:"Georgia","標楷體",Serif;
 }
 td {  /* Table  */
-  font-size: 18px;
+  font-size: 14px;
   font-family:Georgia,"標楷體",Serif;
 }
 h1.title {
@@ -162,7 +162,7 @@ min(vec4)
 range(vec4)
 ```
 
-* Sum & Mean & median & Product
+* Sum & Mean & Median & Product
 ```{r vector-sum-mean, echo=T, eval=T}
 sum(vec4)
 mean(vec4)
@@ -190,7 +190,16 @@ sort(vec4)
 order(vec4)
 ```
 
-<p style="color:#CE0000;font-size:14px;line-height:1">**See the result of `order()` above. It shows that the last value is "4", which means that the index of largest value is "4", that is, `vec4[4]` (15).**</p>  
+See the result of `order()` above. It shows that the last value is "4", which means that the index of largest value is "4", that is, `vec4[4]` (15).  
+
+
+* Unique  
+remove the duplicated element   
+```{r vector-unique, echo=T, eval=T}
+vec_dup=c(1,9,5,2,6,1,8,5,2)
+unique(vec_dup)
+```
+
 
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Calculations with vectors**</p>  
@@ -242,7 +251,9 @@ Also, we can convert the numeric to character as well. Use the function `as.char
 
 * converted from the character vector  
 * should set the levels  
-* setting a factor is very useful when adjusting the sequence of legend in `ggplot2`  
+* some useful tips in R:  
+  * setting a factor is very useful when adjusting the sequence of legend in `ggplot2`  
+  * used to set the dummy variable in the econometric model  
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Use `factor()` to create a factor**</p>  
 
@@ -366,7 +377,7 @@ colMeans(mat2)
 ```
 
 
-## **data frame**
+## **Data frame**
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Features of data frame**</p>  
 
@@ -384,7 +395,7 @@ colMeans(mat2)
 data.frame(A=c(), B=c(), C=c())
 ```
 
-`A`, `B`, and `C` in the function represent the colname of the table.  
+`A`, `B`, and `C` in the function represent the column names of the table.  
 
 
 ```{r dataframe1, echo=T, eval=T}
@@ -397,7 +408,7 @@ StuScore=data.frame(StudentID=c("ID1","ID2","ID3","ID4","ID5"),
 StuScore
 ```
 
-<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Check out the colnames of data frame**</p>  
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Check out the column names of data frame**</p>  
 ```{r dataframe2, echo=T, eval=T}
 colnames(StuScore)
 ```
@@ -440,7 +451,7 @@ StuScore
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Check out the first/ last 6 rows of data**</p>  
 
-Here we use the data `iris` provided by the R base. `iris` is a well-known data set that consists of 50 samples from each of three species of Iris flower (setosa, virginica, and versicolor). The columms include the length and the width of the sepals and petals (5 columns in total).  
+Here we use the data `iris` provided by the R base. `iris` is a well-known data set that consists of 150 samples from each of three species of Iris flower (setosa, virginica, and versicolor). The columms include the length and the width of the sepals and petals (5 columns in total).  
 
 * Use `head()` to retrieve the first 6 rows  
 ```{r dataframe_head, echo=T, eval=T}
@@ -492,12 +503,35 @@ StuScore
 ```
 
 
-## **list**
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Check out the duplicated rows**</p>  
+
+Let's create a new data with duplicated rows.  
+
+```{r dataframe_duplicated1, echo=T, eval=T}
+StuScore_dup=data.frame(StudentID=c("ID1","ID2","ID4","ID3","ID4","ID5","ID2"),
+           Name=c("Bob","Mary","Jason","Robert","Jason","Jane","Mary"),
+           Score=c(60,80,40,100,40,100,80))
+```
+
+```{r dataframe_duplicated1-show, echo=F, eval=T}
+StuScore_dup
+```
+
+We can see some of data are duplicated (ID2 & ID4). Let's use `duplicated()` to check out whether it is repeated for each row.  
+```{r dataframe_duplicated2, echo=T, eval=T}
+duplicated(StuScore_dup)
+```
+
+The result shows that the 5^th^ and 7^th^ are duplicated (`TRUE`). Note that the first appeared row would not be viewed as duplicated.  
+
+
+
+## **List**
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Features of list**</p>  
 
 * collection of objects, which can be vector, matrix, or data frame  
-* most complicated, and often used in the data format of the model result  
+* most complicated, many packages use list to return the result  
 
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Use `list()` to create a list**</p>  
@@ -541,9 +575,18 @@ library(dplyr)
 
 Functions that would be introduced in this section are summarized in Table \@ref(tab:function-dplyr).  
 
-<!-- ```{r function-dplyr, echo=F, eval=T} -->
-<!-- fuc=data.frame(Functions=c("`select()`","`filter()`","`mutate()`","`group_by()`","`summarise()`","`left_join()`","`arrange()`","`rename()`","`distinct()`"), Usage=c("[交通部道路路口定位服務](https://link.motc.gov.tw/swagger/ui/index#!/Node/Node_GetInterCityCNodeID)<br>請點[此處](https://github.com/ChiaJung-Yeh/R-Code-Sharing/raw/main/road_intersections/intersection_data.zip)直接下載所有資料，並解壓縮", '請安裝`TWspdata`套件<br>`install.packages("devtools")`<br>`devtools::install_github("ChiaJung-Yeh/TWspdata")`<br>`library(TWspdata)`<br>載入套件後，請使用`taiwan_village`資料')) -->
-<!-- colnames(data_need)=c("資料","來源") -->
-<!-- kbl(data_need, booktabs=T, escape=F, caption="Vital Functions in `dplyr`")%>% -->
-<!--   kable_styling(bootstrap_options=c("striped", "hover"), font_size=18) -->
-<!-- ``` -->
+```{r function-dplyr, echo=F, eval=T}
+fuc=data.frame(Functions=c("`select()`","`filter()`","`mutate()`","`group_by()`","`summarise()`","`left_join()`","`arrange()`","`rename()`","`distinct()`"), Usage=c("select the specific column of data frame", "filter the data frame by given conditions", "add a new column (attribute) in data frame", "group the data by specific columns, it is commonly followed by `summarise()`", "conduct the basic calculation on data frame, it is commonly used with `group_by()`", "join two data by a specific key (column)", "arrange the data by specific columns", "rename the column name of data frame", "remove the duplicated rows"))
+
+kbl(fuc, booktabs=T, escape=F, caption="Vital Functions in `dplyr`")%>%
+  kable_styling(bootstrap_options=c("striped", "hover"), font_size=14)
+```
+
+
+
+
+
+
+
+
+
