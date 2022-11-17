@@ -65,7 +65,7 @@ library(DT)
 ```
 
 
-<p style="color:#003D79;font-size:16px">**[This notebook would introduce the basic syntax of R Programming.]**</p>
+<p style="color:#003D79;font-size:16px">**This notebook would introduce the basic syntax and `dplyr` package of R Programming. Before digging into Spatial Analysis, let us be familiar with R. The installation of R and R Studio please see [here]()**</p>
 
 
 # **Object**
@@ -511,8 +511,9 @@ StuScore$Height=c(180,165,170,160,175,180)
 StuScore
 ```
 
-
+<a name="dataframe-duplicated">
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Check out the duplicated rows**</p>  
+</a>
 
 Let's create a new data with duplicated rows.  
 
@@ -657,7 +658,7 @@ select(DATA, col1, col2, ...)
 # select data
 world_sel1=select(world, name_long, continent)
 
-# check out the first 6 data
+# check out the first 6 rows
 head(world_sel1)
 ```
 
@@ -672,7 +673,7 @@ sp_col=c("iso_a2", "region_un")
 # select data with specified columns
 world_sel2=select(world, all_of(sp_col))
 
-# check out the first 6 data
+# check out the first 6 rows
 head(world_sel2)
 ```
 
@@ -685,7 +686,7 @@ To do so, just simply add a minus (`-`) before the column name that should be re
 # delete column
 world_sel3=select(world, -continent, -region_un, -subregion, -type)
 
-# check out the first 6 data
+# check out the first 6 rows
 head(world_sel3)
 ```
 
@@ -709,7 +710,7 @@ filter the country where its population (`pop`) is over 100 million
 # filter data by population
 world_fil1=filter(world, pop>100000000)
 
-# check out the first 6 data
+# check out the first 6 rows
 head(world_fil1)
 
 # check how many countries satisfy with the requirement
@@ -725,7 +726,7 @@ filter the country where its continent (`continent`) is in Asia or Europe
 # filter data by population
 world_fil2=filter(world, continent %in% c("Asia", "Europe"))
 
-# check out the first 6 data
+# check out the first 6 rows
 head(world_fil2)
 ```
 
@@ -739,7 +740,7 @@ filter the country where its continent (`continent`) is in Asia or Europe **AND*
 # filter data by multiple conditions
 world_fil3=filter(world, continent %in% c("Asia", "Europe"), pop>100000000)
 
-# check out the first 6 data
+# check out the first 6 rows
 head(world_fil3)
 
 # check how many countries satisfy with the requirements
@@ -786,7 +787,7 @@ add a column to calculate the population density of each country (`pop_dens`)
 # mutate a column for population density
 world_mut1=mutate(world, pop_dens=pop/area_km2)
 
-# check out the first 6 data
+# check out the first 6 rows
 head(world_mut1[, c("name_long","continent","pop","area_km2","pop_dens")])
 ```
 
@@ -813,7 +814,7 @@ area_med=median(world$area_km2, na.rm=T)
 # mutate a column for label
 world_mut2=mutate(world, pop_area=ifelse(pop>pop_med & area_km2>area_med, 1,0))
 
-# check out the first 6 data
+# check out the first 6 rows
 head(world_mut2[, c("name_long","continent","pop","area_km2","pop_area")])
 ```
 
@@ -847,12 +848,12 @@ world_mut3=mutate(world, pop_area_cla=case_when(
   pop<pop_med & area_km2>area_med ~ "SALP",
   pop<pop_med & area_km2<area_med ~ "SASP"))
 
-# check out the first 6 data
+# check out the first 6 rows
 head(world_mut3[, c("name_long","continent","pop","area_km2","pop_area_cla")])
 ```
 
 
-## **Group by**
+## **Group by (& Summarise)**
 
 `group_by()` is usually followed by `filter()` or `summarise()`. To connect two different function, package `dplyr` provides a useful tools, pipe (`%>%`), to connect the functions. When using it, data should only place in the first function.  
 
@@ -913,19 +914,147 @@ left_join(DATA1, DATA2, by=c("col1"="col2"))
 
 It means that using `col1` in `DATA1` and `col2` in `DATA2` to merge two data.  
 
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Left join two data**</p>  
+
 Here we first read the coffee production data of the world. The code is as follows.  
 
 ```{r leftjoin-readdata, echo=T, eval=T}
-world_coffee=read.csv("https://raw.githubusercontent.com/ChiaJung-Yeh/R-Code-Sharing/main/R_Preliminary/world_coffee.csv")
+coffee=read.csv("https://raw.githubusercontent.com/ChiaJung-Yeh/R-Code-Sharing/main/R_Preliminary/coffee.csv")
 ```
 
 Then we can merge these two data by using the country name. Note that the country name in data `world` and `world_coffee` are all `name_long`, and hence, we can simply set `by="`, or even without setting it (the package will automatically find the common name to be the key.)  
 
-```{r leftjoin1, echo=T, eval=F}
-left_join()
+```{r leftjoin1, echo=T, eval=T}
+# left join two data
+world_coffee=left_join(world, coffee, by="name_long")
+
+# check out the first 6 rows
+head(world_coffee)
+```
+
+The result show that only Tanzania produce coffee in the first 6 countries in data.  
+
+
+
+## **Arrange**
+Arrange the value of specific column.  
+
+* **Function & Argument**  
+
+```{r arrange-function, echo=T, eval=F}
+arrange(DATA, col)
+```
+
+It means that using `col` to arrange data by ascending value. Note that the data class of `col` should be numeric or factor.  
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Arrange data by ascending order**</p>  
+
+arrange the data by population with ascending value
+```{r arrange1, echo=T, eval=T}
+# arrange data by population
+world_arr1=arrange(world, pop)
+
+# check out the first 6 rows
+head(world_arr1[, c("name_long","continent","pop")])
 ```
 
 
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Arrange data by descending order**</p>  
+The order in `arrange()` is ascending by default. What if we want the value descending?  
+Simply use function `desc()` in `arrange()` to do so.  
+
+arrange the data by population with descending value
+```{r arrange2, echo=T, eval=T}
+# arrange data by population
+world_arr2=arrange(world, desc(pop))
+
+# check out the first 6 rows
+head(world_arr2[, c("name_long","continent","pop")])
+```
 
 
+## **Rename**
+Rename the column name of the data.  
 
+* **Function & Argument**  
+
+```{r rename-function, echo=T, eval=F}
+rename(DATA, var_new=var_old)
+```
+
+The function above would replace the column name `var_old` with `var_new` in the data.  
+
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Rename by `rename()`**</p>  
+
+rename `name_long` to `country` in data `world`  
+```{r rename-example, echo=T, eval=T}
+# rename the column
+world_ren=rename(world, country=name_long)
+
+# check out the first 6 rows
+head(world_ren[, c("country","continent")])
+```
+
+
+## **distinct**
+Remove the duplicated rows in data frame.  
+
+* **Function & Argument**  
+
+```{r distinct-function, echo=T, eval=F}
+distinct(DATA)
+```
+
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Distinct by `distinct()`**</p>  
+
+Here we first use function `select()` to choose the columns we want. We can then use `duplicated()` (see [Section 1.4 ⌾ Check out the duplicated rows](#dataframe-duplicated)) to test if it exists duplicated rows. Last, we use `distinct()` to remove the repeated ones.  
+
+```{r distinct-example, echo=T, eval=T}
+# select data only three columns: continent, region_un, and subregion
+world_sub=select(world, continent, region_un, subregion)
+
+# check out the first 6 rows
+head(world_sub)
+
+# check if there is duplicated rows in world_sub (show first 10 results)
+duplicated(world_sub)[1:10]
+
+# world_sub has duplicated rows, using distinct to retain the unique one
+world_sub_dis=distinct(world_sub)
+
+# check out the first 6 rows
+head(world_sub_dis)
+```
+
+
+# **Closing**
+
+Now, we know the basic syntax of R programming, and are familiar with package `dplyr`. It is enough to do some big data analysis!!  
+
+In the class in 12/10 (Sat.), we need to dig into the GIS operation in R. Before the class, please install the following packages in advance. Just run the code below!
+
+```{r install-packages, echo=T, eval=F}
+# sf (for GIS)
+install.packages("sf")
+
+# ggplot2 (for plot)
+install.packages("ggplot2")
+
+# spData (for GIS data)
+install.packages("spData")
+
+# TWspdata (for GIS data of Taiwan)
+install.packages("devtools")
+devtools::install_github("ChiaJung-Yeh/TWspdata")
+
+# TDX (for connecting to transport data)
+devtools::install_github("ChiaJung-Yeh/NYCU_TDX")
+```
+
+If you have any questions regarding the installation of R or the basic syntax of R programming, please feel free to contact TA (葉家榮).  
+E-mail: [robert1328.mg10@nycu.edu.tw](mailto:robert1328.mg10@nycu.edu.tw)
+
+See you soon!
