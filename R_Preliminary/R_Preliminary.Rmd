@@ -915,11 +915,15 @@ It means that using `col1` in `DATA1` and `col2` in `DATA2` to merge two data.
 
 Here we first read the coffee production data of the world. The code is as follows.  
 
-```{r leftjoin-function, echo=T, eval=F}
+```{r leftjoin-readdata, echo=T, eval=T}
 world_coffee=read.csv("https://raw.githubusercontent.com/ChiaJung-Yeh/R-Code-Sharing/main/R_Preliminary/world_coffee.csv")
 ```
 
+Then we can merge these two data by using the country name. Note that the country name in data `world` and `world_coffee` are all `name_long`, and hence, we can simply set `by="`, or even without setting it (the package will automatically find the common name to be the key.)  
 
+```{r leftjoin1, echo=T, eval=F}
+left_join()
+```
 
 
 
