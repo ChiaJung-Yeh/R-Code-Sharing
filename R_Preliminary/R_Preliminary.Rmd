@@ -65,7 +65,7 @@ library(DT)
 ```
 
 
-<p style="color:#003D79;font-size:16px">**This notebook would introduce the basic syntax and `dplyr` package of R Programming. Before digging into Spatial Analysis, let us be familiar with R. The installation of R and R Studio please see [here]()**</p>
+<p style="color:#003D79;font-size:16px">**This notebook would introduce the basic syntax and `dplyr` package of R Programming. Before digging into Spatial Analysis, let us be familiar with R. The installation of R and R Studio please see [here](https://github.com/ChiaJung-Yeh/R-Code-Sharing/raw/main/R_Preliminary/%E8%BB%9F%E9%AB%94%E5%AE%89%E8%A3%9D%E8%88%87%E8%B3%87%E6%96%99%E7%94%B3%E8%AB%8B%E8%AA%AA%E6%98%8E.pdf).**</p>
 
 
 # **Object**
