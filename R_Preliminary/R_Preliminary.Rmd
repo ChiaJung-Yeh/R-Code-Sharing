@@ -4,8 +4,6 @@ author: "Chia Jung, Yeh\\\n National Yang Ming Chiao Tung University (NYCU), Tai
 date: "`r Sys.Date()`"
 output:
   bookdown::html_document2:
-    css:
-    - stylebox.css
     toc: TRUE
     toc_depth: 3
     toc_float:
@@ -61,12 +59,9 @@ line-height: 150%;
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
-library(ggplot2)
-library(jsonlite)
-library(sf)
 library(knitr)
 library(kableExtra)
-library(TWspdata)
+library(DT)
 ```
 
 
@@ -93,7 +88,7 @@ Object is the type of data. Commonly used object includes:
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Use `c()` to create a vector**</p>  
 
-* Numeric vector
+* **Numeric vector**
 ```{r vector1, echo=T, eval=F}
 vec1=c(1,2,3,4,5)
 ```
@@ -103,7 +98,7 @@ vec1=c(1,2,3,4,5)
 vec1
 ```
 
-* Character vector
+* **Character vector**
 ```{r vector2, echo=T, eval=F}
 vec2=c("A","B","C","D","E")
 ```
@@ -113,7 +108,7 @@ vec2=c("A","B","C","D","E")
 vec2
 ```
 
-* Logical vector
+* **Logical vector**
 ```{r vector3, echo=T, eval=F}
 vec3=c(T,F,T,F,T)
 ```
@@ -125,19 +120,19 @@ vec3
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Retrieve the specific elements**</p>  
 
-* Retrieve the third element in `vec2`.
+* **Retrieve the third element in `vec2`**
 ```{r vector-retrieve1, echo=T, eval=T}
 vec2[3]
 ```
 
-* Retrieve multiple elements in `vec2`.  
-(continuous elements)   
+* **Retrieve multiple elements in `vec2`**  
+continuous elements  
 ```{r vector-retrieve2, echo=T, eval=T}
 vec2[2:4]
 ```
 
-* Retrieve multiple elements in `vec2`.  
-(non-continuous elements)
+* **Retrieve multiple elements in `vec2`**  
+non-continuous elements
 ```{r vector-retrieve3, echo=T, eval=T}
 vec2[c(1,3,5)]
 ```
@@ -155,14 +150,14 @@ Let us set a numeric vector first.
 vec4=c(1,9,3,15,6,2,8,12)
 ```
 
-* Maximum & Minimum & Range
+* **Maximum & Minimum & Range**  
 ```{r vector-max-min, echo=T, eval=T}
 max(vec4)
 min(vec4)
 range(vec4)
 ```
 
-* Sum & Mean & Median & Product
+* **Sum & Mean & Median & Product**  
 ```{r vector-sum-mean, echo=T, eval=T}
 sum(vec4)
 mean(vec4)
@@ -170,19 +165,19 @@ median(vec4)
 prod(vec4)
 ```
 
-* Variance & Standard deviation
+* **Variance & Standard deviation**  
 ```{r vector-std-var, echo=T, eval=T}
 var(vec4)
 sd(vec4)
 ```
 
-* Length  
+* **Length**  
 number of elements in the vector  
 ```{r vector-length, echo=T, eval=T}
 length(vec4)
 ```
 
-* Order & Sort  
+* **Order & Sort**  
 sort would rearrange the sequence by ascending  
 order would retrieve the index of ascending sequence  
 ```{r vector-sort-order, echo=T, eval=T}
@@ -193,13 +188,19 @@ order(vec4)
 See the result of `order()` above. It shows that the last value is "4", which means that the index of largest value is "4", that is, `vec4[4]` (15).  
 
 
-* Unique  
+* **Unique**  
 remove the duplicated element   
 ```{r vector-unique, echo=T, eval=T}
 vec_dup=c(1,9,5,2,6,1,8,5,2)
 unique(vec_dup)
 ```
 
+* **Check NA**  
+check if the element is NA  
+```{r vector-na, echo=T, eval=T}
+vec_na=c(1,9,5,NA,6,NA)
+is.na(vec_na)
+```
 
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Calculations with vectors**</p>  
@@ -209,7 +210,7 @@ Let us use `vec4` and set a new numeric vector `vec5`.
 vec5=c(2,5,8,11,7,4,10,3)
 ```
 
-* Arithmetic    
+* **Arithmetic (both vectors)**    
 add/ multiple two vectors  
 <p style="color:#CE0000;font-size:14px;line-height:1">**Note that the lengths of the vectors should be the same while doing the calculations!**</p>  
 ```{r vector-addition1, echo=T, eval=T}
@@ -217,7 +218,7 @@ vec4+vec5
 vec4*vec5
 ```
 
-* Arithmetic  
+* **Arithmetic (vector & element)**  
 add/ multiple a value to all the elements in the vector  
 ```{r vector-addition2, echo=T, eval=T}
 vec5+5
@@ -225,19 +226,19 @@ vec5*5
 ```
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Convert data type**</p>  
-* From character to numeric.  
+* **From character to numeric**  
 <p style="color:#CE0000;font-size:14px;line-height:1">**Note that sometimes we may get a "character" type of number when importing the data. We should convert them into "numeric" type in advance, so as to do calculations.**</p>  
 ```{r vector-convert1, echo=T, eval=T}
 vec_cha=c("1","2","3","4","5")
 ```
 
-* Use `class()` to check out the data type.  
+* **Use `class()` to check out the data type**  
 
 ```{r vector-convert2, echo=T, eval=T}
 class(vec_cha)
 ```
 
-* Convert it by function `as.numeric()`.  
+* **Convert it by function `as.numeric()`**  
 ```{r vector-convert3, echo=T, eval=T}
 as.numeric(vec_cha)
 ```
@@ -257,7 +258,7 @@ Also, we can convert the numeric to character as well. Use the function `as.char
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Use `factor()` to create a factor**</p>  
 
-* Function & Argument
+* **Function & Argument**
 ```{r factor1, echo=T, eval=F}
 factor(c(...), levels=c(...))
 ```
@@ -269,7 +270,7 @@ school=c("University","Kindergarten","Elementary","High","Junior High")
 
 We know that the sequence should be Kindergarten >> Elementary >> Junior High >> High >> University.
 
-* Use `factor()` to set their levels.  
+* **Use `factor()` to set their levels**  
 ```{r factor3, echo=T, eval=T}
 school=factor(school, levels=c("Kindergarten","Elementary","Junior High","High","University"))
 ```
@@ -293,12 +294,12 @@ summary(school)
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Convert factor to numeric**</p>  
 
-* Use `as.numeric()` to transform the factor to numeric  
+* **Use `as.numeric()` to transform the factor to numeric**    
 ```{r factor7, echo=T, eval=T}
 as.numeric(school)
 ```
 
-The numeric retrived above represents the level of each elements.  
+The numeric retrieved above represents the level of each elements.  
 
 
 ## **Matrix**
@@ -309,7 +310,7 @@ The numeric retrived above represents the level of each elements.
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Use `matrix()` to create a matrix**</p>  
 
-* Function & Argument
+* **Function & Argument**
   * `nrow=` means number of rows in the matrix  
   * `ncol=` means number of columns in the matrix  
 ```{r matrix-function, echo=T, eval=F}
@@ -327,7 +328,7 @@ mat1
 
 See the result above, the original vector (`c(1:15)`) is filled by columns. What if we want it by row?
 
-* Set argument `byrow=T`
+* **Set argument `byrow=T`**
 
 ```{r matrix2, echo=T, eval=F}
 mat2=matrix(c(1:15), nrow=3, ncol=5, byrow=T)
@@ -364,13 +365,13 @@ t(mat2)
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Calculations on matrix**</p>  
 
-* Sum of each row/ column
+* **Sum of each row/ column**
 ```{r matrix6, echo=T, eval=T}
 rowSums(mat2)
 colSums(mat2)
 ```
 
-* Mean of each row/ column
+* **Mean of each row/ column**  
 ```{r matrix7, echo=T, eval=T}
 rowMeans(mat2)
 colMeans(mat2)
@@ -384,12 +385,12 @@ colMeans(mat2)
 * like a matrix but can have columns with different types  
 * works like a spreadsheet (Excel)
 * commonly used in data analysis
-* can be tidy by the package `dplyr` (see [Section 2](#tidy-data))
+* can be tidy up by the package `dplyr` (see [Section 2](#tidy-data))
 
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Use `data.frame()` to create a data frame**</p>  
 
-* Function & Argument
+* **Function & Argument**
 
 ```{r dataframe-function, echo=T, eval=F}
 data.frame(A=c(), B=c(), C=c())
@@ -413,7 +414,9 @@ StuScore
 colnames(StuScore)
 ```
 
+<a name="dataframe-rowcol">
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Retrieve specific rows/ columns**</p>  
+</a>
 
 * Retrieve rows  
 place the index in front of the comma
@@ -421,26 +424,32 @@ place the index in front of the comma
 StuScore[c(1,3,5),]
 ```
 
-* Retrieve columns  
+* **Retrieve columns**  
 place the index after the comma
 ```{r dataframe4, echo=T, eval=T}
 StuScore[, c(1,2)]
 ```
 
-* Retrieve single column by `data$column_name`  
+* **Retrieve columns by specifying the column names**  
+place the column name vector after the comma
+```{r dataframe4-1, echo=T, eval=T}
+StuScore[, c("StudentID","Name")]
+```
+
+* **Retrieve single column by `data$column_name`**  
 ```{r dataframe5, echo=T, eval=T}
 StuScore$Name
 ```
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Retrieve specific element**</p>  
 
-* Set the index of row and column  
+* **Set the index of row and column**  
 `data[row_index, column_index]`
 ```{r dataframe6, echo=T, eval=T}
 StuScore[2,2]
 ```
 
-* Edit the element by giving value  
+* **Edit the element by giving value**  
 ```{r dataframe7, echo=T, eval=T}
 StuScore[2,2]="Jessica"
 
@@ -453,12 +462,12 @@ StuScore
 
 Here we use the data `iris` provided by the R base. `iris` is a well-known data set that consists of 150 samples from each of three species of Iris flower (setosa, virginica, and versicolor). The columms include the length and the width of the sepals and petals (5 columns in total).  
 
-* Use `head()` to retrieve the first 6 rows  
+* **Use `head()` to retrieve the first 6 rows**  
 ```{r dataframe_head, echo=T, eval=T}
 head(iris)
 ```
 
-* Use `tail()` to retrieve the last 6 rows  
+* **Use `tail()` to retrieve the last 6 rows**  
 ```{r dataframe_tail, echo=T, eval=T}
 tail(iris)
 ```
@@ -468,7 +477,7 @@ tail(iris)
 
 Back to our `StuScore` example. If we want to add attributes of a new student (add new row):
 
-* Use `rbind()` to add new rows  
+* **Use `rbind()` to add new rows**  
 ```{r dataframe_rbind, echo=T, eval=T}
 # first create a new data
 new_student=data.frame(StudentID="ID6", Name="Bob", Score=90)
@@ -482,7 +491,7 @@ StuScore
 
 Then, if we want to add a new attribute (e.g., Gender) for all students (add new column):
 
-* Use `cbind()` to add new columns  
+* **Use `cbind()` to add new columns**  
 ```{r dataframe_cbind, echo=T, eval=T}
 # first create a new data
 Gender=c("M","F","M","M","F","M")
@@ -522,7 +531,7 @@ We can see some of data are duplicated (ID2 & ID4). Let's use `duplicated()` to 
 duplicated(StuScore_dup)
 ```
 
-The result shows that the 5^th^ and 7^th^ are duplicated (`TRUE`). Note that the first appeared row would not be viewed as duplicated.  
+The result shows that the row 5 and 7 are duplicated (`TRUE`). Note that the first appeared row would not be viewed as duplicated.  
 
 
 
@@ -550,12 +559,12 @@ StuScore_list
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾  Retrieve the attribute of list**</p>  
 
-* Use `list$NAME` to retrieve  
+* **Use `list$NAME` to retrieve**  
 ```{r list2, echo=T, eval=T}
 StuScore_list$Score
 ```
 
-* Use index to retrieve  
+* **Use index to retrieve**  
 ```{r list3, echo=T, eval=T}
 StuScore_list[[2]]
 ```
@@ -576,14 +585,335 @@ library(dplyr)
 Functions that would be introduced in this section are summarized in Table \@ref(tab:function-dplyr).  
 
 ```{r function-dplyr, echo=F, eval=T}
-fuc=data.frame(Functions=c("`select()`","`filter()`","`mutate()`","`group_by()`","`summarise()`","`left_join()`","`arrange()`","`rename()`","`distinct()`"), Usage=c("select the specific column of data frame", "filter the data frame by given conditions", "add a new column (attribute) in data frame", "group the data by specific columns, it is commonly followed by `summarise()`", "conduct the basic calculation on data frame, it is commonly used with `group_by()`", "join two data by a specific key (column)", "arrange the data by specific columns", "rename the column name of data frame", "remove the duplicated rows"))
+fuc=data.frame(Functions=c("`select()`","`filter()`","`mutate()`","`group_by()`","`summarise()`","`left_join()`","`arrange()`","`rename()`","`distinct()`"), Usage=c("select the specific column of data frame", "filter the data frame by given conditions", "add a new column (attribute) in data frame", "group the data by specific columns, it is commonly followed by `filter()` or `summarise()`", "conduct the basic calculation on data frame, it is commonly used with `group_by()`", "join two data by a specific key (column)", "arrange the data by specific columns", "rename the column name of data frame", "remove the duplicated rows"))
 
 kbl(fuc, booktabs=T, escape=F, caption="Vital Functions in `dplyr`")%>%
   kable_styling(bootstrap_options=c("striped", "hover"), font_size=14)
 ```
 
+Before introducing how to process the data by using package `dplyr`, let's first see how to read the data.  
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Read data by `read.csv()`**</p>  
+
+* **From local directory**  
+when the file is in your computer  
+```{r read-local, echo=T, eval=F}
+# function
+read.csv("DIRECTORY")
+
+# example
+read.csv("C:/Users/Robert/Downloads/world.csv")
+```
+
+<p style="color:#CE0000;font-size:14px;line-height:1">**Note that the "single forward slash (/)" is used in the directory.<br>Do not use "single backslash (\\)!<br>Alternatively, we can use "double backslash (\\\\)" instead.**</p>  
+
+* **From website**  
+when the file is on the website (with a url)  
+```{r read-url, echo=T, eval=F}
+# function
+read.csv("url")
+
+# example
+read.csv("https://raw.githubusercontent.com/ChiaJung-Yeh/R-Code-Sharing/main/R_Preliminary/world.csv")
+```
 
 
+Here we adopt the second method to obtain our data.  
+```{r read-data, echo=T, eval=F}
+# read data
+world=read.csv("https://raw.githubusercontent.com/ChiaJung-Yeh/R-Code-Sharing/main/R_Preliminary/world.csv")
+
+# check out the data
+world
+```
+
+
+```{r read-data-show, echo=F, eval=T, message=F, warning=F}
+world=read.csv("https://raw.githubusercontent.com/ChiaJung-Yeh/R-Code-Sharing/main/R_Preliminary/world.csv")
+datatable(world, options=list(pageLength=5, scrollX=T, headerCallback = DT::JS(
+    "function(thead) {",
+    "  $(thead).css('font-size', '0.7em');",
+    "}"
+  )))%>%
+  formatStyle(columns=c(1:ncol(world)), fontSize='12px')%>%
+  formatRound(c("area_km2", "lifeExp","gdpPercap"), digits=2)
+```
+
+
+## **Select**
+Select the column we want in the data frame. This function is the same as retrieving columns in data frame introduced in [Section 1.4](#dataframe-rowcol).  
+
+* **Function & Argument**
+
+```{r select-function, echo=T, eval=F}
+select(DATA, col1, col2, ...)
+```
+
+`col1` and `col2` above represent the column names that would be retrieved.  
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Select columns by `select()`**</p>  
+
+```{r select1, echo=T, eval=T}
+# select data
+world_sel1=select(world, name_long, continent)
+
+# check out the first 6 data
+head(world_sel1)
+```
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Select columns by given column names vector**</p>  
+
+First set up a character vector to store the column name that would be retrieved. Then, Use `all_of()` in `select()` to call all of the column stored in the vector.  
+
+```{r select2, echo=T, eval=T}
+# specified columns vector
+sp_col=c("iso_a2", "region_un")
+
+# select data with specified columns
+world_sel2=select(world, all_of(sp_col))
+
+# check out the first 6 data
+head(world_sel2)
+```
+
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Delete columns in data frame**</p>  
+
+To do so, just simply add a minus (`-`) before the column name that should be removed.  
+
+```{r select3, echo=T, eval=T}
+# delete column
+world_sel3=select(world, -continent, -region_un, -subregion, -type)
+
+# check out the first 6 data
+head(world_sel3)
+```
+
+
+## **Filter**
+Filter the data frame by given conditions.  
+
+* **Function & Argument**
+
+```{r filter-function, echo=T, eval=F}
+filter(DATA, condition1, condition2, ...)
+```
+
+`condition1` and `condition2` above represent the condition we set. Add more conditions in `filter()` means that **ALL** the conditions should be satisfied (condition1 & condition2 & ...).  
+
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Numeric filter**</p>  
+
+filter the country where its population (`pop`) is over 100 million
+```{r filter1, echo=T, eval=T}
+# filter data by population
+world_fil1=filter(world, pop>100000000)
+
+# check out the first 6 data
+head(world_fil1)
+
+# check how many countries satisfy with the requirement
+nrow(world_fil1)
+```
+
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Character filter**</p>  
+`A %in% B` is used to check if each of the element in vector A is listed in the vector B  
+  
+filter the country where its continent (`continent`) is in Asia or Europe  
+```{r filter2, echo=T, eval=T}
+# filter data by population
+world_fil2=filter(world, continent %in% c("Asia", "Europe"))
+
+# check out the first 6 data
+head(world_fil2)
+```
+
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Multiple filter (AND)**</p>  
+* add conditions in the function `filter()`  
+* alternatively, we can use `&` to connect all of the conditions in `filter()`  
+  
+filter the country where its continent (`continent`) is in Asia or Europe **AND** the population (`pop`) is over 100 million
+```{r filter3, echo=T, eval=T}
+# filter data by multiple conditions
+world_fil3=filter(world, continent %in% c("Asia", "Europe"), pop>100000000)
+
+# check out the first 6 data
+head(world_fil3)
+
+# check how many countries satisfy with the requirements
+nrow(world_fil3)
+```
+
+Or, we can use `&` to connect the conditions as follows.  
+```{r filter4, echo=T, eval=T}
+# filter data by multiple conditions
+world_fil4=filter(world, continent %in% c("Asia", "Europe") & pop>100000000)
+```
+
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Multiple filter (OR)**</p>  
+* when any of the condition is met, retrieve the data  
+* use `|` to connect all of the conditions in `filter()`  
+```{r filter5, echo=T, eval=T}
+# filter data by multiple conditions
+world_fil5=filter(world, continent %in% c("Asia", "Europe") | pop>100000000)
+
+# check how many countries satisfy with the requirements
+nrow(world_fil5)
+```
+
+
+
+## **Mutate**
+Add the new columns (attributes) or update the columns in data frame. This function is similar to `cbind()` introduced in [Section 1.4](#dataframe-rowcol).  
+
+* **Function & Argument**
+
+```{r mutate-function, echo=T, eval=F}
+mutate(DATA, A=..., B=..., ...)
+```
+
+`A` and `B` above represent the operation of generating the new columns.  
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Mutate a new column by column operations**</p>  
+
+add a column to calculate the population density of each country (`pop_dens`)  
+<p style="color:#CE0000;font-size:14px;line-height:1">**Population density is population (`pop`) divided by area (`area_km2`).**</p>  
+
+```{r mutate1, echo=T, eval=T}
+# mutate a column for population density
+world_mut1=mutate(world, pop_dens=pop/area_km2)
+
+# check out the first 6 data
+head(world_mut1[, c("name_long","continent","pop","area_km2","pop_dens")])
+```
+
+<p style="color:#CE0000;font-size:14px;line-height:1">**Since there are missing data on population in some of countries, there exists NA in `pop_dens`.**</p>  
+
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Mutate a new column with `ifelse()`**</p>  
+
+* **Function & Argument**
+
+```{r ifelse-function, echo=T, eval=F}
+ifelse(condition, do when true, do when false)
+```
+
+
+add a column to label the country if area and population are both higher than median (label 1 if true)  
+<p style="color:#CE0000;font-size:14px;line-height:1">**Note that there are NA in the column, we should set `na.rm=T` in the function `median()`, to remove NA in advance.**</p>  
+
+```{r mutate2, echo=T, eval=T}
+# calculate the medium first
+pop_med=median(world$pop, na.rm=T)
+area_med=median(world$area_km2, na.rm=T)
+
+# mutate a column for label
+world_mut2=mutate(world, pop_area=ifelse(pop>pop_med & area_km2>area_med, 1,0))
+
+# check out the first 6 data
+head(world_mut2[, c("name_long","continent","pop","area_km2","pop_area")])
+```
+
+
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Mutate a new column with `case_when()`**</p>  
+
+* **Function & Argument**
+
+```{r case_when-function, echo=T, eval=F}
+case_when(DATA, 
+          condition1 ~ result1, 
+          condition2 ~ result2, 
+          condition3 ~ result3,...)
+```
+
+It means that if the `condition` is satisfied, then retrieve the `result`.  
+
+
+add a column to classify the country into large area large population (LALP), large area small population (LASP), small area large population (SALP), and small area small population (SASP) by the median of each attribute  
+
+```{r mutate3, echo=T, eval=T}
+# calculate the medium first
+pop_med=median(world$pop, na.rm=T)
+area_med=median(world$area_km2, na.rm=T)
+
+# mutate a column for classfication
+world_mut3=mutate(world, pop_area_cla=case_when(
+  pop>pop_med & area_km2>area_med ~ "LALP",
+  pop>pop_med & area_km2<area_med ~ "LASP",
+  pop<pop_med & area_km2>area_med ~ "SALP",
+  pop<pop_med & area_km2<area_med ~ "SASP"))
+
+# check out the first 6 data
+head(world_mut3[, c("name_long","continent","pop","area_km2","pop_area_cla")])
+```
+
+
+## **Group by**
+
+`group_by()` is usually followed by `filter()` or `summarise()`. To connect two different function, package `dplyr` provides a useful tools, pipe (`%>%`), to connect the functions. When using it, data should only place in the first function.  
+
+* **Function & Argument**  
+
+`group_by() %>% filter()`  
+```{r groupby-function1, echo=T, eval=F}
+group_by(DATA, column)%>%
+  filter(condition)
+```
+
+`group_by() %>% summrise()`  
+```{r groupby-function2, echo=T, eval=F}
+group_by(DATA, column)%>%
+  summarise(operation)
+```
+
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Group by with filter**</p>  
+
+filter the largest population (`pop`) of each continent  
+
+```{r groupby1, echo=T, eval=T, warning=F}
+# calculate the medium first
+world_gro1=group_by(world, continent)%>%
+  filter(pop==max(pop, na.rm=T))
+
+# check out the result
+world_gro1
+```
+
+By using `group_by() %>% filter()`, all of the attributes would be retained.  
+
+<p style="color:#003D79;font-size:18px;line-height:2">**⌾ Group by with summarise**</p>  
+calculate the total population (`pop`) and average life expectancy (`lifeExp`) of each continent  
+
+```{r groupby2, echo=T, eval=T, warning=F}
+# calculate the medium first
+world_gro2=group_by(world, continent)%>%
+  summarise(total_pop=sum(pop, na.rm=T),
+            ave_lifeExp=mean(lifeExp, na.rm=T))
+
+# check out the result
+world_gro2
+```
+
+By using `group_by() %>% summarise()`, it can retrieve the operation on specific column. Note that only the specified column are retained in the result.  
+
+
+## **Left join**
+Merge two different data by referencing the key (terminology in database management: primary key)
+
+* **Function & Argument**  
+
+```{r leftjoin-function, echo=T, eval=F}
+left_join(DATA1, DATA2, by=c("col1"="col2"))
+```
+
+It means that using `col1` in `DATA1` and `col2` in `DATA2` to merge two data.  
+
+Here we use a 
 
 
 
