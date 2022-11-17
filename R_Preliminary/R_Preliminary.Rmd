@@ -913,7 +913,12 @@ left_join(DATA1, DATA2, by=c("col1"="col2"))
 
 It means that using `col1` in `DATA1` and `col2` in `DATA2` to merge two data.  
 
-Here we use a 
+Here we first read the coffee production data of the world. The code is as follows.  
+
+```{r leftjoin-function, echo=T, eval=F}
+world_coffee=read.csv("https://raw.githubusercontent.com/ChiaJung-Yeh/R-Code-Sharing/main/R_Preliminary/world_coffee.csv")
+```
+
 
 
 
