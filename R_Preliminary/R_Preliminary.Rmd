@@ -983,7 +983,7 @@ Rename the column name of the data.
 rename(DATA, var_new=var_old)
 ```
 
-The function above would replace the column name `var_new` with `var_old` in the data.  
+The function above would replace the column name `var_old` with `var_new` in the data.  
 
 
 <p style="color:#003D79;font-size:18px;line-height:2">**⌾ Rename by `rename()`**</p>  
