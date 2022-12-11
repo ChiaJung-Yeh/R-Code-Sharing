@@ -1,0 +1,187 @@
+---
+title: "R GIS Homework"
+author: "Chia Jung, Yeh\\\n National Yang Ming Chiao Tung University (NYCU), Taiwan"
+date: "`r Sys.Date()`"
+output:
+  bookdown::html_document2:
+    toc: TRUE
+    toc_depth: 3
+    toc_float:
+      collapsed: TRUE
+      smooth_scroll: FALSE
+    theme: lumen
+---
+
+<style type="text/css">
+
+body{
+font-size: 16px;
+font-family:"Georgia","標楷體",Serif;
+}
+td {  /* Table  */
+  font-size: 14px;
+  font-family:Georgia,"標楷體",Serif;
+}
+h1.title {
+  font-size: 38px;
+  color: DarkRed;
+  font-family:Georgia,"標楷體",Serif;
+}
+h1 { /* Header 1 */
+  font-size: 24px;
+  font-family:Georgia,"標楷體",Serif;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+    font-family:Georgia,"標楷體",Serif;
+    color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+  font-family:Georgia,"標楷體",Serif;
+  color: DarkBlue;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+.blogbody{
+font-size:17px;
+  font-family:Georgia,"標楷體",Serif;
+line-height: 150%;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(DT)
+library(spData)
+library(sf)
+library(ggplot2)
+```
+
+
+<p style="color:#003D79;font-size:16px">**Homework for R GIS Course. Please make sure you have read following materials.**</p>   
+
+* [**R Preliminary**](https://chiajung-yeh.github.io/R-Code-Sharing/R_Preliminary/R_Preliminary.html)
+* [**Spatial Analysis with R**](https://chiajung-yeh.github.io/Spatial-Analysis/)  
+
+
+# **Homework I**
+Plot US map, and fill the color by the region of each states. Then create the centroid of each states, which the size of dots should depend on the population density.  
+
+**Data**
+All of the data are in package `spData`!  
+`us_states`  
+
+**Steps & Hints:**  
+
+1. Calculate the population density in year 2015. **(total_pop_15/AREA)**  
+2. Generate the centroid of each stated by function [`st_centroid()`](https://chiajung-yeh.github.io/Spatial-Analysis/spatial-operations.html#centroid).  
+3. Plot the map by [`geom_sf()`](https://chiajung-yeh.github.io/Spatial-Analysis/data-visualization-with-maps.html#map-overlay). Note that there are two maps should be placed, one is the map of US with different color on each region, and the other is the dot map with different size on population density.  
+
+
+```{r hw1, echo=F, eval=T, warning=F}
+us_states_temp=us_states
+us_states_temp$POPDENS=as.numeric(us_states_temp$total_pop_15/us_states_temp$AREA)
+us_states_centroid=st_centroid(us_states_temp)
+ggplot()+
+  geom_sf(data=us_states, aes(fill=REGION))+
+  scale_fill_brewer(palette="Set3", name="Region")+
+  geom_sf(data=us_states_centroid, aes(size=POPDENS))+
+  scale_size_continuous(range=c(1,5), name="Population Density")+
+  theme_void()
+```
+
+
+
+
+# **Homework II**
+Plot the map of `sidscents`. Data `sidscents` is a pure text file, please convert it to a simple feature data in advance. Then, find out which states `sidscents` is located in in the United States. After that, filtering the state in the data `us_states`. Finally, plot the map of that specific states as well as `sidscents`. In addition, please label the name of that states directly on the map.  
+
+**Data**
+All of the data are in package `spData`!  
+`sidscents`  
+`us_states`  
+
+**Steps & Hints:**  
+
+1. Convert the data `sidscents` to a simple feature by the function [`st_as_sfc()`](https://chiajung-yeh.github.io/Spatial-Analysis/geographic-data.html#convert-text-file-to-shapefile).  
+2. Use function [`st_intersection()`](https://chiajung-yeh.github.io/Spatial-Analysis/spatial-operations.html#clipping) to find out the state that `sidscents` located in. Please note that the coordinate reference system of two geographic data might not be the same, before doing intersection, please ensure they are the same. If not, use function [`st_transform()`](https://chiajung-yeh.github.io/Spatial-Analysis/geographic-data.html#reproject-geographic-data) to convert the CRS.  
+3. Retrieve the specific states from the data `us_states` by function [`filter()`](https://chiajung-yeh.github.io/R-Code-Sharing/R_Preliminary/R_Preliminary.html#22_Filter).  
+4. Plot the map by [`geom_sf()`](https://chiajung-yeh.github.io/Spatial-Analysis/data-visualization-with-maps.html#map-overlay). And use function [`geom_sf_text()`](https://chiajung-yeh.github.io/Spatial-Analysis/data-visualization-with-maps.html#labels-on-map) to add the label of the states name.  
+
+
+```{r hw2, echo=F, eval=T, warning=F}
+sidscents_sf=data.frame(sidscents)
+colnames(sidscents_sf)=c("X","Y")
+sidscents_sf=mutate(sidscents_sf, geometry=st_as_sfc(paste0("POINT(", X, " ", Y, ")")))%>%
+  st_sf(crs=4326)
+us_states=st_transform(us_states, crs=4326)
+sidscents_sf=st_intersection(sidscents_sf, us_states)
+us_states_temp=filter(us_states, NAME %in% unique(sidscents_sf$NAME))
+ggplot()+
+  geom_sf(data=us_states_temp)+
+  geom_sf(data=sidscents_sf)+
+  geom_sf_text(data=us_states_temp, aes(label=NAME), size=6, color="blue", vjust=-1.9, hjust=-0.1)+
+  theme_void()
+```
+
+
+
+
+# **Homework III**
+Plot the map of death rate of Covid-19 in US states. Please first download the map from the websites provided by Humanitarian Data Exchange (HDX) in US. And filter the data of date "2022-12-01". After that, please further calculate the death rate (deaths/cases) of each state. Finally, plot the graduated symbol map base on the death rate. And please add the boundary of each region in US (shown as the blue color line in the map below).  
+
+**Data**
+All of the data are in package `spData`!  
+`us_states`  
+
+**Steps & Hints:**  
+
+1. Download Covid-19 data from Humanitarian Data Exchange (HDX). The code is as below.  
+```{r hw3_data, echo=T, eval=F, warning=F}
+us_covid=read.csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnytimes%2Fcovid-19-data%2Fmaster%2Fus-states.csv&filename=us-states.csv")
+```
+2. Filter the data which date is "2022-12-01". Note that the data is cumulative, so column `cases` means that the total confirmed cases from the break out of pandemic, while column `deaths` represents the total deaths. And then please calculate the death rate based on these two columns.  
+3. Use function [`group_by() %>% summarise()`](https://chiajung-yeh.github.io/Spatial-Analysis/spatial-operations.html#attribute-aggregation) to retrieve the region of US.  
+4. Retrieve the boundary of each region by function [`st_boundary()`](https://chiajung-yeh.github.io/Spatial-Analysis/spatial-operations.html#boundary).  
+5. Plot the map by [`geom_sf()`](https://chiajung-yeh.github.io/Spatial-Analysis/data-visualization-with-maps.html#map-overlay). And use [`scale_*_*`](https://chiajung-yeh.github.io/Spatial-Analysis/data-visualization-with-maps.html#graduated-symbol-map) to plot the graduated symbol map according to the death rate.  
+
+```{r hw3, echo=F, eval=T, warning=F}
+us_covid=read.csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnytimes%2Fcovid-19-data%2Fmaster%2Fus-states.csv&filename=us-states.csv")
+us_covid=filter(us_covid, date=="2022-12-01")
+us_states_covid=left_join(us_states, us_covid, by=c("NAME"="state"))
+us_states_covid$death_rate=us_states_covid$deaths/us_states_covid$cases
+us_states_boundary=group_by(us_states, REGION)%>%
+  summarise()%>%
+  st_boundary()
+ggplot()+
+  geom_sf(data=us_states_covid, aes(fill=death_rate))+
+  scale_fill_distiller(palette="YlOrRd", direction=1, name="Death Rate")+
+  geom_sf(data=us_states_boundary, color="blue", linewidth=1)+
+  theme_void()
+```
+
+
+After finishing all the problems, please submit to e3 directly, including your R code and the maps you plot.  
+
+Please contact me if you have any questions on the homework.  
+E-mail: [robert1328.mg10@nycu.edu.tw](mailto:robert1328.mg10@nycu.edu.tw)
+
+
+
+
+
+
+
+
+
+
