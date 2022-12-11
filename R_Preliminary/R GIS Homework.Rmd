@@ -77,7 +77,7 @@ library(ggplot2)
 # **Homework I**
 Plot US map, and fill the color by the region of each states. Then create the centroid of each states, which the size of dots should depend on the population density.  
 
-**Data**
+**Data**  
 All of the data are in package `spData`!  
 `us_states`  
 
@@ -106,7 +106,7 @@ ggplot()+
 # **Homework II**
 Plot the map of `sidscents`. Data `sidscents` is a pure text file, please convert it to a simple feature data in advance. Then, find out which states `sidscents` is located in in the United States. After that, filtering the state in the data `us_states`. Finally, plot the map of that specific states as well as `sidscents`. In addition, please label the name of that states directly on the map.  
 
-**Data**
+**Data**  
 All of the data are in package `spData`!  
 `sidscents`  
 `us_states`  
@@ -140,7 +140,7 @@ ggplot()+
 # **Homework III**
 Plot the map of death rate of Covid-19 in US states. Please first download the map from the websites provided by Humanitarian Data Exchange (HDX) in US. And filter the data of date "2022-12-01". After that, please further calculate the death rate (deaths/cases) of each state. Finally, plot the graduated symbol map base on the death rate. And please add the boundary of each region in US (shown as the blue color line in the map below).  
 
-**Data**
+**Data**  
 All of the data are in package `spData`!  
 `us_states`  
 
