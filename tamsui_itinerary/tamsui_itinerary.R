@@ -18,7 +18,8 @@ tamsui_itinerary_line=cbind(temp[1:(nrow(temp)-1),] %>% rename(Site_O=Site, lon_
 
 tamsui_itinerary=mutate(tamsui_itinerary, geometry=st_as_sfc(paste0("POINT(", lon, " ", lat, ")")))%>%
   st_sf(crs=4326)%>%
-  select(-Location, -lon, -lat, -Path)
+  select(-Location, -lon, -lat, -Path)%>%
+  filter(Site!="dummy")
 
 
 leaflet()%>%
