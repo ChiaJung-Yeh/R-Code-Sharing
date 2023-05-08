@@ -37,7 +37,7 @@ leaflet()%>%
                               zcol=c("景點", "時間", "備註"),
                               feature.id=F,
                               row.numbers=F))%>%
-  addPolylines(data=tamsui_itinerary_line, popup=tamsui_itinerary_line$Path, color="#02C874", weight=6, popupOptions=popupOptions(style=list("color"="red")))
+  addPolylines(data=tamsui_itinerary_line, popup=tamsui_itinerary_line$Path, color="#02C874", weight=11, popupOptions=popupOptions(style=list("color"="red")))
 
 
 
