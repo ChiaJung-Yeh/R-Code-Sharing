@@ -7,7 +7,7 @@ library(leafpop)
 
 tmap_mode("view")
 
-tamsui_itinerary=read.csv("./tamsui_itinerary.csv", fileEncoding="Big5")
+tamsui_itinerary=read.csv("./tamsui_itinerary/tamsui_itinerary.csv", fileEncoding="Big5")
 tamsui_itinerary$lat=substr(tamsui_itinerary$Location, 1, regexpr(",", tamsui_itinerary$Location)-1)
 tamsui_itinerary$lon=substr(tamsui_itinerary$Location, regexpr(",", tamsui_itinerary$Location)+2, 100)
 
@@ -31,7 +31,7 @@ leaflet()%>%
                                          "font-family"="serif",
                                          "font-style"="bold",
                                          "box-shadow" = "2px 3px rgba(0,0,0,0.25)",
-                                         "font-size"="11px"
+                                         "font-size"="20px"
                                        )),
              popup=popupTable(rename(tamsui_itinerary, 景點=Site, 時間=Time, 備註=Note),
                               zcol=c("景點", "時間", "備註"),
