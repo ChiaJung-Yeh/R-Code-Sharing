@@ -401,8 +401,8 @@ data.frame(A=c(), B=c(), C=c())
 
 ```{r dataframe1, echo=T, eval=T}
 StuScore=data.frame(StudentID=c("ID1","ID2","ID3","ID4","ID5"),
-           Name=c("Bob","Mary","Robert","Jason","Jane"),
-           Score=c(60,80,40,50,100))
+                    Name=c("Bob","Mary","Robert","Jason","Jane"),
+                    Score=c(60,80,40,50,100))
 ```
 
 ```{r dataframe1-show, echo=F, eval=T}
