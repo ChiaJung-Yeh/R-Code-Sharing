@@ -1,0 +1,154 @@
+---
+title: "Extract OSM features using R"
+author: "Chia-Jung (Robert), Yeh"
+date: "`r Sys.Date()`"
+output:
+  bookdown::html_document2:
+    toc: TRUE
+    toc_depth: 3
+    toc_float:
+      collapsed: TRUE
+      smooth_scroll: FALSE
+    theme: lumen
+---
+
+<style type="text/css">
+
+body{
+font-size: 16px;
+font-family:"Georgia","標楷體",Serif;
+}
+td {  /* Table  */
+  font-size: 14px;
+  font-family:Georgia,"標楷體",Serif;
+}
+h1.title {
+  font-size: 38px;
+  color: DarkRed;
+  font-family:Georgia,"標楷體",Serif;
+}
+h1 { /* Header 1 */
+  font-size: 24px;
+  font-family:Georgia,"標楷體",Serif;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+    font-family:Georgia,"標楷體",Serif;
+    color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+  font-family:Georgia,"標楷體",Serif;
+  color: DarkBlue;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+.blogbody{
+font-size:17px;
+  font-family:Georgia,"標楷體",Serif;
+line-height: 150%;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(osmdata)
+library(tmap)
+library(sf)
+tmap_mode("view")
+```
+
+
+# **Introduction**
+
+## **What is OSM?**
+OpenStreetMap (OSM) is an open-source platform that allows users to collaboratively edit and download geographic features with a standardised tagging structure. Each feature in OSM is described using a set of key-value tags. The **key** represents a general category of geographic elements, such as `amenity`, `highway`, `water.` The **value** represents a more specific classification within that category (key). For example, the key `highway` may include values like `motorway`, `trunk`, `primary`, and other road types. Therefore, this tagging system enables efficient structuring and extraction of geospatial features for elements across the globe.  
+
+See [here](https://wiki.openstreetmap.org/wiki/Map_features) for all the tags for key and value in OSM.  
+
+## **R package required**
+The package required for connecting to OSM is `osmdata`. Please install the package as follows and load it into R code.  
+
+```{r package, echo=T, eval=F}
+install.packages("osmdata")
+library(osmdata)
+```
+
+# **Using `osmdata`**
+
+## **Basic structure**
+The basic structure accessing OSM data through code is as follows. The `BOUNDARY_BOX` defines the spatial extent of the area from which we want to retrieve OSM data. Within the `add_osm_feature()` function, we need to specify the argument `key` and `value` to download the desired category of geographic features. Finally, using `osmdata_sf()` function to retrieve all the simple features (spatial data).  
+
+```{r basic-code, echo=T, eval=F}
+opq(BOUNDARY_BOX)%>%
+  add_osm_feature(key="KEY", value="VALUE")%>%
+  osmdata_sf()
+```
+
+The final results include `points`, `lines`, `polygons`, and also the multi-geometry.  
+
+
+## **Example**
+
+Now we take accessing the footpath data in Canberra for example.  
+
+First of all, read the polygon data to define our target area. And please make sure that the CRS is EPSG::4326, which aligns with the CRS for OSM. If the CRS is not consistent, please use function `st_transform()` to convert it.     
+
+```{r example1, echo=T, eval=T}
+canberra=read_sf("https://raw.githubusercontent.com/tonywr71/GeoJson-Data/refs/heads/master/suburb-2-act.geojson")
+
+print(st_crs(canberra)) # EPSG:4283
+canberra=st_transform(canberra, crs=4326)
+```
+
+Then retrieve the boundary for the area using function `st_bbox()`.  
+
+```{r example2, echo=T, eval=T}
+# Extract the boundary of the spatial data
+canberra_box=st_bbox(canberra)
+
+print(canberra_box)
+```
+
+Let's plot a map to show the target area and its extent.  
+
+```{r example3, echo=T, eval=T}
+# Plot the map
+tm_shape(canberra)+
+  tm_polygons()+
+  tm_shape(st_as_sfc(canberra_box))+
+  tm_borders(lty="dashed", col="red")
+```
+
+We can then access OSM data using the basic structure mentioned above.   
+
+```{r example4, echo=T, eval=T}
+# Take sidewalk in Canberra for example
+sidewalk=opq(canberra_box)%>%
+  add_osm_feature(key="footway", value="sidewalk")%>%
+  osmdata_sf()
+```
+
+
+Finally, plot all the spatial data to see the results.  
+
+```{r example5, echo=T, eval=T}
+# Plot the result
+tm_shape(canberra)+
+  tm_polygons(alpha=0.2, border.alpha=0.2)+
+  tm_shape(sidewalk$osm_lines)+
+  tm_lines(col="blue")+
+  tm_shape(st_as_sfc(canberra_box))+
+  tm_borders(lty="dashed", col="red")
+```
+
+
