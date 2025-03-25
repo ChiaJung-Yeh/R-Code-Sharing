@@ -152,3 +152,7 @@ tm_shape(canberra)+
 ```
 
 
+Click [here](https://raw.githubusercontent.com/ChiaJung-Yeh/R-Code-Sharing/refs/heads/main/OSM%20Data/OSM%20Data%20Extraction.R) to see full R code. 
+
+
+
