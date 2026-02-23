@@ -3,6 +3,7 @@ devtools::install_github("ChiaJung-Yeh/NYCU_TDX")
 
 # 載入TDX套件
 library(TDX)
+library(dplyr)
 
 # 前30分鐘免費：2024/02/28
 # 以施行日期前後各半年為例
